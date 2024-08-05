@@ -43,8 +43,8 @@ const ServerController = () => {
         <span
           className={
             status === 'Online'
-              ? 'text-green-500 self-center'
-              : 'text-red-500 self-center'
+              ? 'text-green-700 font-bold self-center'
+              : 'text-red-600 font-bold self-center'
           }
         >
           {status}
