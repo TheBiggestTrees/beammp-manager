@@ -60,6 +60,62 @@ function GeneralServerSettings() {
               }}
             />
           </div>
+          <div className="flex">
+            <span className="text-white mr-2">Port: </span>
+            <input
+              className="bg-white border-2 border-black rounded-lg w-16"
+              type="number"
+              value={serverSettings.General.Port}
+              onChange={(e) => {
+                return setServerSettings((prev) => ({
+                  ...prev,
+                  General: { ...prev.General, Port: e.target.value },
+                }));
+              }}
+            />
+          </div>
+          <div className="flex">
+            <span className="text-white mr-2">Max Players: </span>
+            <input
+              className="bg-white border-2 border-black rounded-lg w-16"
+              type="number"
+              value={serverSettings.General.MaxPlayers}
+              onChange={(e) => {
+                return setServerSettings((prev) => ({
+                  ...prev,
+                  General: { ...prev.General, MaxPlayers: e.target.value },
+                }));
+              }}
+            />
+          </div>
+          <div className="flex">
+            <span className="text-white mr-2">Max Cars: </span>
+            <input
+              className="bg-white border-2 border-black rounded-lg w-16"
+              type="number"
+              value={serverSettings.General.MaxCars}
+              onChange={(e) => {
+                return setServerSettings((prev) => ({
+                  ...prev,
+                  General: { ...prev.General, MaxCars: e.target.value },
+                }));
+              }}
+            />
+          </div>
+          <div className="flex">
+            <span className="text-white mr-2">Auth Key: </span>
+            <input
+              type="text"
+              className="bg-white border-2 border-black rounded-lg w-80"
+              value={serverSettings.General.AuthKey}
+              onChange={(e) => {
+                return setServerSettings((prev) => ({
+                  ...prev,
+                  General: { ...prev.General, AuthKey: e.target.value },
+                }));
+              }}
+            />
+          </div>
         </div>
       )}
     </div>
