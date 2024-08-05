@@ -16,6 +16,8 @@ declare global {
         getMaps(): void;
         selectMap(): void;
         getSelectedMap(): void;
+        getServerSettings(): void;
+        setServerSettings(): void;
       };
     };
   }

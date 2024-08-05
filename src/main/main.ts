@@ -65,6 +65,17 @@ ipcMain.handle('getBackground', async () => {
   return res;
 });
 
+ipcMain.handle('getServerSettings', async () => {
+  const tomlconfig = fs.readFileSync(`${Directory()}/ServerConfig.toml`);
+  const parseToml = TOML.parse(tomlconfig);
+  return parseToml;
+});
+
+ipcMain.on('setServerSettings', (event, arg) => {
+  const tomlconfig = TOML.stringify(arg);
+  fs.writeFileSync(`${Directory()}/ServerConfig.toml`, tomlconfig);
+});
+
 ipcMain.handle('getMaps', async () => {
   const res = await getMaps();
   const zippedFolders = [];
