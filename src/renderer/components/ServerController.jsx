@@ -37,41 +37,38 @@ const ServerController = () => {
   }, []);
 
   return (
-    <div className="flex flex-row items-center justify-between ">
-      <h1 className="text-3xl text-white font-bold">BeamMP Manager</h1>
-      <div className="flex flex-col gap-2 border-2 border-black rounded-lg p-2 bg-gray-400">
-        <span
-          className={
-            status === 'Online'
-              ? 'text-green-700 font-bold self-center'
-              : 'text-red-600 font-bold self-center'
-          }
+    <div className="flex flex-col gap-2 border-2 w-[320px] mt-2 border-black rounded-lg p-2 bg-gray-400">
+      <span
+        className={
+          status === 'Online'
+            ? 'text-green-700 font-bold self-center'
+            : 'text-red-600 font-bold self-center'
+        }
+      >
+        {status}
+      </span>
+      <div className="flex gap-2 ">
+        <button
+          type="button"
+          className="bg-white w-24 h-8 border-2 border-black rounded-lg"
+          onClick={() => Controller('start')}
         >
-          {status}
-        </span>
-        <div className="flex gap-2 ">
-          <button
-            type="button"
-            className="bg-white w-24 h-8 border-2 border-black rounded-lg"
-            onClick={() => Controller('start')}
-          >
-            Start
-          </button>
-          <button
-            type="button"
-            className="bg-white w-24 h-8 border-2 border-black rounded-lg"
-            onClick={() => Controller('stop')}
-          >
-            Stop
-          </button>
-          <button
-            type="button"
-            className="bg-white w-24 h-8 border-2 border-black rounded-lg"
-            onClick={() => Controller('restart')}
-          >
-            Restart
-          </button>
-        </div>
+          Start
+        </button>
+        <button
+          type="button"
+          className="bg-white w-24 h-8 border-2 border-black rounded-lg"
+          onClick={() => Controller('stop')}
+        >
+          Stop
+        </button>
+        <button
+          type="button"
+          className="bg-white w-24 h-8 border-2 border-black rounded-lg"
+          onClick={() => Controller('restart')}
+        >
+          Restart
+        </button>
       </div>
     </div>
   );

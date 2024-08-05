@@ -264,6 +264,7 @@
   },
   "electronmon": {
     "patterns": [
+      "!userconfig.json",
       "!src/__tests__/**",
       "!release/**"
     ],

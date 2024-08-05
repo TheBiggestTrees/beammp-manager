@@ -1,5 +1,45 @@
 function SettingTextBox(props) {
-  const { setServerSettings, text, value, generalValue, type, width } = props;
+  const { setServerSettings, text, value, generalValue, type, width, misc } =
+    props;
+
+  if (misc) {
+    return (
+      <div className="flex">
+        <span className="text-white mr-2">{text}: </span>
+        <button
+          type="button"
+          className="bg-white w-24 h-8 border-2 border-black rounded-lg"
+          onClick={() => {
+            return setServerSettings((prev) => ({
+              ...prev,
+              Misc: { ...prev.Misc, [generalValue]: !value },
+            }));
+          }}
+        >
+          {value ? 'Yes' : 'No'}
+        </button>
+      </div>
+    );
+  }
+  if (type === 'button') {
+    return (
+      <div className="flex">
+        <span className="text-white mr-2">{text}: </span>
+        <button
+          type="button"
+          className="bg-white w-24 h-8 border-2 border-black rounded-lg"
+          onClick={() => {
+            return setServerSettings((prev) => ({
+              ...prev,
+              General: { ...prev.General, [generalValue]: !value },
+            }));
+          }}
+        >
+          {value ? 'Yes' : 'No'}
+        </button>
+      </div>
+    );
+  }
 
   if (type === 'textarea') {
     return (

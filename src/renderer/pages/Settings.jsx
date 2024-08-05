@@ -1,6 +1,5 @@
 /* eslint no-console: "off" */
 import { useEffect, useState } from 'react';
-import LinkButton from 'renderer/components/LinkButton';
 
 function Settings() {
   const [background, setBackground] = useState(false);
@@ -35,8 +34,7 @@ function Settings() {
   };
 
   return (
-    <div className="flex flex-col h-[100vh] px-4 py-4">
-      <LinkButton to="" text="Home" />
+    <div className="flex flex-col px-4 py-4">
       <span className="text-white text-3xl font-bold">Settings</span>
       <div className="flex gap-2 items-center">
         <span>Run in background: </span>
@@ -52,10 +50,10 @@ function Settings() {
         </button>
       </div>
       <div className="flex items-center gap-2">
-        <span>Folder: </span>
+        <span>Server Location: </span>
         <button
           type="button"
-          className="bg-white w-24 h-8 border-2 border-black rounded-lg"
+          className="bg-white w-auto px-2 h-8 border-2 border-black rounded-lg"
           onClick={(e) => {
             e.preventDefault();
             SelectFolder();

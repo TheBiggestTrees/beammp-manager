@@ -94,19 +94,16 @@ ipcMain.handle('getMaps', async () => {
 
 ipcMain.on('selectMap', (event, arg) => {
   userconfig = fs.readFileSync('userconfig.json');
-  const parsed = JSON.parse(userconfig);
-
-  fs.writeFileSync(
-    'userconfig.json',
-    JSON.stringify({ ...parsed, selectedMap: arg }, null, 4)
-  );
-
   const tomlconfig = fs.readFileSync(`${Directory()}/ServerConfig.toml`);
+  const parsed = JSON.parse(userconfig);
   const parseToml = TOML.parse(tomlconfig);
   const toml = TOML.stringify({
     ...parseToml,
     General: { ...parseToml.General, Map: `/levels/${arg}/info.json` },
   });
+  const JSONstring = JSON.stringify({ ...parsed, selectedMap: arg }, null, 4);
+  fs.writeFileSync('userconfig.json', JSONstring);
+
   fs.writeFileSync(`${Directory()}/ServerConfig.toml`, toml);
 });
 

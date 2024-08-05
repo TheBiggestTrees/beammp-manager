@@ -1,18 +1,47 @@
+import { useEffect, useState } from 'react';
 import GeneralServerSettings from 'renderer/components/GeneralServerSettings';
-import LinkButton from 'renderer/components/LinkButton';
-import ServerController from 'renderer/components/ServerController';
+import Maps from 'renderer/components/Maps';
 
-function Home() {
+function Home(props) {
+  const { mapCache, setMapCache, setMaps, setSelectedMap, maps, selectedMap } =
+    props;
+  const [serverSettings, setServerSettings] = useState(null);
+
+  useEffect(() => {
+    window.electron.ipcRenderer
+      .getServerSettings()
+      .then((res) => {
+        return setServerSettings(res);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
-    <div className="flex flex-col h-[100vh] px-4 py-4">
-      <div className="flex flex-row gap-2">
-        <LinkButton to="settings" text="Settings" />
-        <LinkButton to="maps" text="Maps" />
-      </div>
-
-      <ServerController />
-      <GeneralServerSettings />
-    </div>
+    <>
+      {serverSettings !== null ? (
+        <div className="flex ml-4">
+          <GeneralServerSettings
+            serverSettings={serverSettings}
+            setServerSettings={setServerSettings}
+          />
+          <Maps
+            mapCache={mapCache}
+            setMapCache={setMapCache}
+            setMaps={setMaps}
+            setSelectedMap={setSelectedMap}
+            maps={maps}
+            selectedMap={selectedMap}
+          />
+        </div>
+      ) : (
+        <div>
+          <p className="text-white text-xl font-bold">
+            Check your server location in{' '}
+            <span className="text-yellow-200">Settings</span>
+          </p>
+        </div>
+      )}
+    </>
   );
 }
 
