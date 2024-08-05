@@ -13,6 +13,6 @@
   scrollbar-width: none; /* Firefox */
 }
 
-* {
+:root {
   background-color: #6b7280;
 }

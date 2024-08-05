@@ -37,32 +37,42 @@ const ServerController = () => {
   }, []);
 
   return (
-    <div className="flex flex-col">
-      <span className={status === 'Online' ? 'text-green-500' : 'text-red-500'}>
-        {status}
-      </span>
-
-      <button
-        type="button"
-        className="bg-white w-24 h-8 border-2 border-black rounded-lg"
-        onClick={() => Controller('start')}
-      >
-        Start
-      </button>
-      <button
-        type="button"
-        className="bg-white w-24 h-8 border-2 border-black rounded-lg"
-        onClick={() => Controller('stop')}
-      >
-        Stop
-      </button>
-      <button
-        type="button"
-        className="bg-white w-24 h-8 border-2 border-black rounded-lg"
-        onClick={() => Controller('restart')}
-      >
-        Restart
-      </button>
+    <div className="flex flex-row items-center justify-between ">
+      <h1 className="text-3xl text-white font-bold">BeamMP Manager</h1>
+      <div className="flex flex-col gap-2 border-2 border-black rounded-lg p-2 bg-gray-400">
+        <span
+          className={
+            status === 'Online'
+              ? 'text-green-500 self-center'
+              : 'text-red-500 self-center'
+          }
+        >
+          {status}
+        </span>
+        <div className="flex gap-2 ">
+          <button
+            type="button"
+            className="bg-white w-24 h-8 border-2 border-black rounded-lg"
+            onClick={() => Controller('start')}
+          >
+            Start
+          </button>
+          <button
+            type="button"
+            className="bg-white w-24 h-8 border-2 border-black rounded-lg"
+            onClick={() => Controller('stop')}
+          >
+            Stop
+          </button>
+          <button
+            type="button"
+            className="bg-white w-24 h-8 border-2 border-black rounded-lg"
+            onClick={() => Controller('restart')}
+          >
+            Restart
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

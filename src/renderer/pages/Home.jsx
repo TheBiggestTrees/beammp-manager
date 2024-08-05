@@ -1,3 +1,4 @@
+import GeneralServerSettings from 'renderer/components/GeneralServerSettings';
 import LinkButton from 'renderer/components/LinkButton';
 import ServerController from 'renderer/components/ServerController';
 
@@ -8,8 +9,9 @@ function Home() {
         <LinkButton to="settings" text="Settings" />
         <LinkButton to="maps" text="Maps" />
       </div>
-      <h1 className="text-3xl text-white font-bold">BeamMP Manager</h1>
+
       <ServerController />
+      <GeneralServerSettings />
     </div>
   );
 }

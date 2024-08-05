@@ -48,7 +48,7 @@ function Maps() {
   };
 
   return (
-    <div className="flex flex-col bg-gray-500 px-4 py-4">
+    <div className="flex flex-col bg-gray-500 px-4 py-4 no-scrollbar">
       <div className="flex flex-row gap-2">
         <LinkButton to="" text="Home" />
         <LinkButton to="settings" text="Settings" />
@@ -57,7 +57,7 @@ function Maps() {
       <h1 className="text-3xl text-white font-bold mb-2">Maps</h1>
       <span>Selected: {selectedMap}</span>
       <span>Total: {maps.length}</span>
-      <div className="flex flex-col gap-2 h-[78vh] overflow-auto no-scrollbar">
+      <div className="flex flex-col gap-2 h-[70vh] mb-2 overflow-auto no-scrollbar">
         {maps.map((map) => (
           <div
             className="flex items-center justify-center bg-white border-2 border-black rounded-lg"
