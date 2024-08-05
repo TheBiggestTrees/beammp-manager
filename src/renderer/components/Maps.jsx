@@ -26,23 +26,25 @@ function Maps() {
       </div>
 
       <h1 className="text-3xl text-white font-bold mb-2">Maps</h1>
-      {maps.map((map) => (
-        <div
-          className="flex items-center justify-center bg-white border-2 border-black rounded-lg"
-          onClick={() => SelectMap(map)}
-          onKeyDown={(event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-              event.preventDefault();
-              SelectMap(map);
-            }
-          }}
-          role="button"
-          tabIndex={0}
-          key={map}
-        >
-          {map}
-        </div>
-      ))}
+      <div className="flex flex-col gap-2">
+        {maps.map((map) => (
+          <div
+            className="flex items-center justify-center bg-white border-2 border-black rounded-lg"
+            onClick={() => SelectMap(map)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                SelectMap(map);
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            key={map}
+          >
+            {map}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
