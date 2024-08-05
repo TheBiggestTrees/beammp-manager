@@ -107,6 +107,10 @@
     ]
   },
   "dependencies": {
+    "@iarna/toml": "^2.2.5",
+    "@std/toml": "npm:@jsr/std__toml@^1.0.0-rc.4",
+    "@zip-js/zip-js": "npm:@jsr/zip-js__zip-js@^2.7.48",
+    "adm-zip": "^0.5.14",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.7",
     "electron-store": "^10.0.0",

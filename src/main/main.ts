@@ -20,8 +20,11 @@ import {
   ExecuteServer,
   getMaps,
 } from '../executer';
+import GetFolderNames from './helper/zip';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+
+const TOML = require('@iarna/toml');
 
 export default class AppUpdater {
   constructor() {
@@ -64,7 +67,45 @@ ipcMain.handle('getBackground', async () => {
 
 ipcMain.handle('getMaps', async () => {
   const res = await getMaps();
-  return res;
+  const zippedFolders = [];
+  for (let i = 0; i < res.length; i++) {
+    try {
+      const zipFolders = await GetFolderNames(
+        `${Directory()}\\custom_maps\\${res[i]}`
+      );
+      zippedFolders.push(zipFolders);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  return zippedFolders;
+});
+
+ipcMain.on('selectMap', (event, arg) => {
+  userconfig = fs.readFileSync('userconfig.json');
+  const parsed = JSON.parse(userconfig);
+
+  fs.writeFileSync(
+    'userconfig.json',
+    JSON.stringify({ ...parsed, selectedMap: arg }, null, 4)
+  );
+
+  const tomlconfig = fs.readFileSync(`${Directory()}/ServerConfig.toml`);
+  const parseToml = TOML.parse(tomlconfig);
+  const toml = TOML.stringify({
+    ...parseToml,
+    General: { ...parseToml.General, Map: `/levels/${arg}/info.json` },
+  });
+  fs.writeFileSync(`${Directory()}/ServerConfig.toml`, toml);
+});
+
+ipcMain.handle('getSelectedMap', async () => {
+  const user = fs.readFileSync('userconfig.json');
+  if (user) {
+    userconfig = JSON.parse(user);
+    return userconfig.selectedMap;
+  }
+  return false;
 });
 
 ipcMain.on('executeServer', async (event, arg) => {

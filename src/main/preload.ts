@@ -27,5 +27,6 @@ contextBridge.exposeInMainWorld('electron', {
     setBackground: (arg) => ipcRenderer.send('setBackground', arg),
     getMaps: () => ipcRenderer.invoke('getMaps'),
     selectMap: (arg) => ipcRenderer.send('selectMap', arg),
+    getSelectedMap: () => ipcRenderer.invoke('getSelectedMap'),
   },
 });

@@ -13,6 +13,9 @@ declare global {
         Directory(): void;
         getBackground(): Promise<boolean>;
         setBackground(): void;
+        getMaps(): void;
+        selectMap(): void;
+        getSelectedMap(): void;
       };
     };
   }
