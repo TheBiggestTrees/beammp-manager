@@ -13,7 +13,13 @@ import log from 'electron-log';
 import { autoUpdater } from 'electron-updater';
 import * as fs from 'fs';
 import path from 'path';
-import { BackGround, CheckServer, Directory, ExecuteServer } from '../executer';
+import {
+  BackGround,
+  CheckServer,
+  Directory,
+  ExecuteServer,
+  getMaps,
+} from '../executer';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
@@ -53,6 +59,11 @@ ipcMain.on('setBackground', (event, arg) => {
 
 ipcMain.handle('getBackground', async () => {
   const res = await BackGround();
+  return res;
+});
+
+ipcMain.handle('getMaps', async () => {
+  const res = await getMaps();
   return res;
 });
 

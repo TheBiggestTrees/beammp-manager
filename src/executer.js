@@ -42,9 +42,21 @@ async function CheckServer() {
   }
 }
 
+async function getMaps() {
+  try {
+    const directory = Directory();
+    const res = await fs.promises.readdir(`${directory}/custom_maps`);
+    return res;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
 module.exports = {
   ExecuteServer,
   CheckServer,
   Directory,
   BackGround,
+  getMaps,
 };
