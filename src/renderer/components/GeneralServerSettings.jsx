@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import SettingTextBox from './SettingTextBox';
 
 function GeneralServerSettings() {
   const [serverSettings, setServerSettings] = useState({
@@ -34,88 +35,53 @@ function GeneralServerSettings() {
       <div className="bg-black rounded-lg h-[2px]" />
       {serverSettings !== { General: {}, Misc: {} } && (
         <div className="flex flex-col gap-2 mt-2">
-          <div className="flex">
-            <span className="text-white mr-2">Name: </span>
-            <input
-              className="bg-white border-2 border-black rounded-lg"
-              value={serverSettings.General.Name}
-              onChange={(e) => {
-                return setServerSettings((prev) => ({
-                  ...prev,
-                  General: { ...prev.General, Name: e.target.value },
-                }));
-              }}
-            />
-          </div>
-          <div className="flex">
-            <span className="text-white mr-2">Description: </span>
-            <textarea
-              className="bg-white border-2 border-black rounded-lg w-60 h-16 "
-              value={serverSettings.General.Description}
-              onChange={(e) => {
-                return setServerSettings((prev) => ({
-                  ...prev,
-                  General: { ...prev.General, Description: e.target.value },
-                }));
-              }}
-            />
-          </div>
-          <div className="flex">
-            <span className="text-white mr-2">Port: </span>
-            <input
-              className="bg-white border-2 border-black rounded-lg w-16"
-              type="number"
-              value={serverSettings.General.Port}
-              onChange={(e) => {
-                return setServerSettings((prev) => ({
-                  ...prev,
-                  General: { ...prev.General, Port: e.target.value },
-                }));
-              }}
-            />
-          </div>
-          <div className="flex">
-            <span className="text-white mr-2">Max Players: </span>
-            <input
-              className="bg-white border-2 border-black rounded-lg w-16"
-              type="number"
-              value={serverSettings.General.MaxPlayers}
-              onChange={(e) => {
-                return setServerSettings((prev) => ({
-                  ...prev,
-                  General: { ...prev.General, MaxPlayers: e.target.value },
-                }));
-              }}
-            />
-          </div>
-          <div className="flex">
-            <span className="text-white mr-2">Max Cars: </span>
-            <input
-              className="bg-white border-2 border-black rounded-lg w-16"
-              type="number"
-              value={serverSettings.General.MaxCars}
-              onChange={(e) => {
-                return setServerSettings((prev) => ({
-                  ...prev,
-                  General: { ...prev.General, MaxCars: e.target.value },
-                }));
-              }}
-            />
-          </div>
-          <div className="flex">
-            <span className="text-white mr-2">Auth Key: </span>
-            <input
-              type="text"
-              className="bg-white border-2 border-black rounded-lg w-80"
-              value={serverSettings.General.AuthKey}
-              onChange={(e) => {
-                return setServerSettings((prev) => ({
-                  ...prev,
-                  General: { ...prev.General, AuthKey: e.target.value },
-                }));
-              }}
-            />
-          </div>
+          <SettingTextBox
+            setServerSettings={setServerSettings}
+            text="Name"
+            value={serverSettings.General.Name}
+            generalValue="Name"
+            type="text"
+          />
+          <SettingTextBox
+            text="Description"
+            setServerSettings={setServerSettings}
+            value={serverSettings.General.Description}
+            generalValue="Description"
+            type="textarea"
+          />
+
+          <SettingTextBox
+            setServerSettings={setServerSettings}
+            text="Port"
+            value={serverSettings.General.Port}
+            generalValue="Port"
+            type="text"
+            width="w-16"
+          />
+          <SettingTextBox
+            setServerSettings={setServerSettings}
+            text="Max Players"
+            value={serverSettings.General.MaxPlayers}
+            generalValue="MaxPlayers"
+            type="number"
+            width="w-16"
+          />
+          <SettingTextBox
+            setServerSettings={setServerSettings}
+            text="Max Cars"
+            value={serverSettings.General.MaxCars}
+            generalValue="MaxCars"
+            type="number"
+            width="w-16"
+          />
+          <SettingTextBox
+            setServerSettings={setServerSettings}
+            text="Auth Key"
+            value={serverSettings.General.AuthKey}
+            generalValue="AuthKey"
+            type="text"
+            width="w-80"
+          />
         </div>
       )}
     </div>
