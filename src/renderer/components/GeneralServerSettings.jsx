@@ -1,5 +1,15 @@
 function GeneralServerSettings() {
-  return <div>General Server Settings</div>;
+  return (
+    <div>
+      <h2 className="text-2xl text-white font-bold mb-2">
+        General Server Settings
+      </h2>
+      <div className="bg-black rounded-lg h-[3px]" />
+      <div>
+        <span className="text-white">Not Implemented</span>
+      </div>
+    </div>
+  );
 }
 
 export default GeneralServerSettings;
