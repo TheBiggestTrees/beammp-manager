@@ -1,5 +1,5 @@
 function GeneralServerSettings() {
-  return <div>GeneralServerSettings</div>;
+  return <div>General Server Settings</div>;
 }
 
 export default GeneralServerSettings;
