@@ -35,7 +35,7 @@ function Settings() {
   };
 
   return (
-    <div className="flex flex-col h-[100vh] bg-gray-500 px-4 py-4">
+    <div className="flex flex-col h-[100vh] px-4 py-4">
       <LinkButton to="" text="Home" />
       <span className="text-white text-3xl font-bold">Settings</span>
       <div className="flex gap-2 items-center">

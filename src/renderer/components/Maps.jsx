@@ -48,7 +48,7 @@ function Maps() {
   };
 
   return (
-    <div className="flex flex-col bg-gray-500 px-4 py-4 no-scrollbar">
+    <div className="flex flex-col px-4 py-4 no-scrollbar">
       <div className="flex flex-row gap-2">
         <LinkButton to="" text="Home" />
         <LinkButton to="settings" text="Settings" />
