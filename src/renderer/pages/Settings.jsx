@@ -1,9 +1,9 @@
 /* eslint no-console: "off" */
 import { useEffect, useState } from 'react';
 
-function Settings() {
+function Settings(props) {
+  const { folder, setFolder } = props;
   const [background, setBackground] = useState(false);
-  const [folder, setFolder] = useState('');
 
   useEffect(() => {
     window.electron.ipcRenderer
@@ -54,8 +54,7 @@ function Settings() {
         <button
           type="button"
           className="bg-white w-auto px-2 h-8 border-2 border-black rounded-lg"
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={() => {
             SelectFolder();
           }}
         >

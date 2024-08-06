@@ -11,6 +11,7 @@ export default function App() {
   const [mapCache, setMapCache] = useState(null);
   const [maps, setMaps] = useState([]);
   const [selectedMap, setSelectedMap] = useState('');
+  const [folder, setFolder] = useState('');
 
   const defaultMaps = [
     'gridmap',
@@ -30,7 +31,7 @@ export default function App() {
     'johnson_valley',
   ];
 
-  const refreshMaps = () => {
+  const RefreshMaps = () => {
     if (!mapCache) {
       window.electron.ipcRenderer
         .getMaps()
@@ -45,12 +46,11 @@ export default function App() {
         .then((res) => setSelectedMap(res))
         .catch((err) => console.error(err));
     }
-    console.log(mapCache);
   };
 
   useEffect(() => {
-    refreshMaps();
-  }, []);
+    RefreshMaps();
+  }, [folder]);
 
   return (
     <AppProvider>
@@ -77,7 +77,10 @@ export default function App() {
                 />
               }
             />
-            <Route path="/settings" element={<Settings />} />
+            <Route
+              path="/settings"
+              element={<Settings folder={folder} setFolder={setFolder} />}
+            />
           </Routes>
         </div>
       </Router>
