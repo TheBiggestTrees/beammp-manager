@@ -1,23 +1,27 @@
+import { useState } from 'react';
 import SettingTextBox from './SettingTextBox';
 
 function GeneralServerSettings(props) {
   const { serverSettings, setServerSettings } = props;
 
-  console.log(serverSettings);
+  const [settingsChanged, setSettingsChanged] = useState(false);
 
   return (
     <div className="flex flex-col w-full">
       <div className="flex justify-between my-2 items-center">
         <h2 className="text-2xl text-white font-bold mb-2">Home</h2>
-        <button
-          className="bg-white w-24 h-8 border-2 border-black rounded-lg"
-          type="button"
-          onClick={() => {
-            window.electron.ipcRenderer.setServerSettings(serverSettings);
-          }}
-        >
-          Save
-        </button>
+        {settingsChanged && (
+          <button
+            className="bg-green-400 w-24 h-8 border-2 border-black rounded-lg"
+            type="button"
+            onClick={() => {
+              window.electron.ipcRenderer.setServerSettings(serverSettings);
+              setSettingsChanged(false);
+            }}
+          >
+            Save
+          </button>
+        )}
       </div>
       <div className="bg-black rounded-lg h-[2px]" />
 
@@ -28,6 +32,7 @@ function GeneralServerSettings(props) {
           value={serverSettings.General.Name}
           generalValue="Name"
           type="text"
+          setSettingsChanged={setSettingsChanged}
         />
         <SettingTextBox
           setServerSettings={setServerSettings}
@@ -36,6 +41,7 @@ function GeneralServerSettings(props) {
           generalValue="AuthKey"
           type="text"
           width="w-80"
+          setSettingsChanged={setSettingsChanged}
         />
         <SettingTextBox
           setServerSettings={setServerSettings}
@@ -44,6 +50,7 @@ function GeneralServerSettings(props) {
           generalValue="Port"
           type="number"
           width="w-16"
+          setSettingsChanged={setSettingsChanged}
         />
         <SettingTextBox
           setServerSettings={setServerSettings}
@@ -52,6 +59,7 @@ function GeneralServerSettings(props) {
           generalValue="MaxPlayers"
           type="number"
           width="w-16"
+          setSettingsChanged={setSettingsChanged}
         />
         <SettingTextBox
           setServerSettings={setServerSettings}
@@ -60,6 +68,7 @@ function GeneralServerSettings(props) {
           generalValue="MaxCars"
           type="number"
           width="w-16"
+          setSettingsChanged={setSettingsChanged}
         />
 
         <SettingTextBox
@@ -68,6 +77,7 @@ function GeneralServerSettings(props) {
           value={serverSettings.General.Description}
           generalValue="Description"
           type="textarea"
+          setSettingsChanged={setSettingsChanged}
         />
         <SettingTextBox
           setServerSettings={setServerSettings}
@@ -75,6 +85,7 @@ function GeneralServerSettings(props) {
           value={serverSettings.General.Tags}
           generalValue="Tags"
           type="textarea"
+          setSettingsChanged={setSettingsChanged}
         />
 
         <SettingTextBox
@@ -83,6 +94,7 @@ function GeneralServerSettings(props) {
           value={serverSettings.General.LogChat}
           generalValue="LogChat"
           type="button"
+          setSettingsChanged={setSettingsChanged}
         />
         <SettingTextBox
           setServerSettings={setServerSettings}
@@ -90,6 +102,7 @@ function GeneralServerSettings(props) {
           value={serverSettings.General.Private}
           generalValue="Private"
           type="button"
+          setSettingsChanged={setSettingsChanged}
         />
 
         <SettingTextBox
@@ -98,6 +111,7 @@ function GeneralServerSettings(props) {
           value={serverSettings.General.Debug}
           generalValue="Debug"
           type="button"
+          setSettingsChanged={setSettingsChanged}
         />
         <SettingTextBox
           setServerSettings={setServerSettings}
@@ -106,6 +120,7 @@ function GeneralServerSettings(props) {
           generalValue="ImScaredOfUpdates"
           misc
           type="button"
+          setSettingsChanged={setSettingsChanged}
         />
         <SettingTextBox
           setServerSettings={setServerSettings}
@@ -114,6 +129,7 @@ function GeneralServerSettings(props) {
           generalValue="SendErrorsShowMessage"
           misc
           type="button"
+          setSettingsChanged={setSettingsChanged}
         />
         <SettingTextBox
           setServerSettings={setServerSettings}
@@ -122,6 +138,7 @@ function GeneralServerSettings(props) {
           generalValue="SendErrors"
           misc
           type="button"
+          setSettingsChanged={setSettingsChanged}
         />
       </div>
     </div>

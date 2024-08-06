@@ -1,6 +1,14 @@
 function SettingTextBox(props) {
-  const { setServerSettings, text, value, generalValue, type, width, misc } =
-    props;
+  const {
+    setServerSettings,
+    text,
+    value,
+    generalValue,
+    type,
+    width,
+    misc,
+    setSettingsChanged,
+  } = props;
 
   if (misc) {
     return (
@@ -10,6 +18,7 @@ function SettingTextBox(props) {
           type="button"
           className="bg-white w-24 h-8 border-2 border-black rounded-lg"
           onClick={() => {
+            setSettingsChanged(true);
             return setServerSettings((prev) => ({
               ...prev,
               Misc: { ...prev.Misc, [generalValue]: !value },
@@ -29,6 +38,7 @@ function SettingTextBox(props) {
           type="button"
           className="bg-white w-24 h-8 border-2 border-black rounded-lg"
           onClick={() => {
+            setSettingsChanged(true);
             return setServerSettings((prev) => ({
               ...prev,
               General: { ...prev.General, [generalValue]: !value },
@@ -49,6 +59,7 @@ function SettingTextBox(props) {
           className="bg-white border-2 border-black rounded-lg w-60 h-16 "
           value={value}
           onChange={(e) => {
+            setSettingsChanged(true);
             return setServerSettings((prev) => ({
               ...prev,
               General: { ...prev.General, [generalValue]: e.target.value },
@@ -67,6 +78,7 @@ function SettingTextBox(props) {
         className={`bg-white border-2 border-black rounded-lg ${width}`}
         value={value}
         onChange={(e) => {
+          setSettingsChanged(true);
           return setServerSettings((prev) => ({
             ...prev,
             General: { ...prev.General, [generalValue]: e.target.value },
