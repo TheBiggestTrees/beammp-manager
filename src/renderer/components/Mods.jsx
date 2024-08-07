@@ -23,12 +23,13 @@ function Mods() {
           <span className="font-bold">
             Total:{' '}
             <span className="text-white">
-              {modList && modList.activated.length}
+              {modList && modList.activated.length - 1}
             </span>
           </span>
           <div className="flex flex-col gap-2 h-[45vh] no-scrollbar overflow-auto">
             {modList &&
               modList.activated.map((mod) => {
+                if (mod === 'deactivated_mods') return null;
                 return (
                   <button
                     key={mod}
@@ -51,7 +52,7 @@ function Mods() {
               })}
           </div>
         </div>
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col w-full">
           <h1 className="text-lg text-white font-bold">Deactivated</h1>
           <span className="font-bold">
             Total:{' '}
