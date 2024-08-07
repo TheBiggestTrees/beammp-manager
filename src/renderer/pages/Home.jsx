@@ -26,16 +26,16 @@ function Home(props) {
               serverSettings={serverSettings}
               setServerSettings={setServerSettings}
             />
-            <Maps
-              mapCache={mapCache}
-              setMapCache={setMapCache}
-              setMaps={setMaps}
-              setSelectedMap={setSelectedMap}
-              maps={maps}
-              selectedMap={selectedMap}
-            />
+            <Mods />
           </div>
-          <Mods />
+          <Maps
+            mapCache={mapCache}
+            setMapCache={setMapCache}
+            setMaps={setMaps}
+            setSelectedMap={setSelectedMap}
+            maps={maps}
+            selectedMap={selectedMap}
+          />
         </>
       ) : (
         <div>
