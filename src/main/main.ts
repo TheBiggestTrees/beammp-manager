@@ -92,6 +92,17 @@ ipcMain.handle('getMaps', async () => {
   return zippedFolders;
 });
 
+ipcMain.handle('getModList', async () => {
+  const activated = await fs.promises.readdir(
+    `${Directory()}\\Resources\\Client`
+  );
+  const deactivated = await fs.promises.readdir(
+    `${Directory()}\\Resources\\Client\\deactivated_mods`
+  );
+  const res = { ...activated, deactivated: { ...deactivated } };
+  return res;
+});
+
 ipcMain.on('selectMap', (event, arg) => {
   userconfig = fs.readFileSync('userconfig.json');
   const tomlconfig = fs.readFileSync(`${Directory()}/ServerConfig.toml`);

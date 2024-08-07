@@ -8,8 +8,8 @@ function GeneralServerSettings(props) {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="flex justify-between my-2 items-center">
-        <h2 className="text-2xl text-white font-bold mb-2">Home</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-3xl text-white font-bold mt-4 mb-2">Home</h2>
         {settingsChanged && (
           <button
             className="bg-green-400 w-24 h-8 border-2 border-black rounded-lg"

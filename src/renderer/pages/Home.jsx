@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import GeneralServerSettings from 'renderer/components/GeneralServerSettings';
 import Maps from 'renderer/components/Maps';
+import Mods from 'renderer/components/Mods';
 
 function Home(props) {
   const { mapCache, setMapCache, setMaps, setSelectedMap, maps, selectedMap } =
@@ -19,20 +20,23 @@ function Home(props) {
   return (
     <>
       {serverSettings !== null ? (
-        <div className="flex ml-4">
-          <GeneralServerSettings
-            serverSettings={serverSettings}
-            setServerSettings={setServerSettings}
-          />
-          <Maps
-            mapCache={mapCache}
-            setMapCache={setMapCache}
-            setMaps={setMaps}
-            setSelectedMap={setSelectedMap}
-            maps={maps}
-            selectedMap={selectedMap}
-          />
-        </div>
+        <>
+          <div className="flex ml-4">
+            <GeneralServerSettings
+              serverSettings={serverSettings}
+              setServerSettings={setServerSettings}
+            />
+            <Maps
+              mapCache={mapCache}
+              setMapCache={setMapCache}
+              setMaps={setMaps}
+              setSelectedMap={setSelectedMap}
+              maps={maps}
+              selectedMap={selectedMap}
+            />
+          </div>
+          <Mods />
+        </>
       ) : (
         <div>
           <p className="text-white text-xl font-bold">

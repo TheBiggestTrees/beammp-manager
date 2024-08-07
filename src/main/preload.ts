@@ -30,5 +30,6 @@ contextBridge.exposeInMainWorld('electron', {
     getSelectedMap: () => ipcRenderer.invoke('getSelectedMap'),
     getServerSettings: () => ipcRenderer.invoke('getServerSettings'),
     setServerSettings: (arg) => ipcRenderer.send('setServerSettings', arg),
+    getModList: () => ipcRenderer.invoke('getModList'),
   },
 });
