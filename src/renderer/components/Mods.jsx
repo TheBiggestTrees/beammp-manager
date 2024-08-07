@@ -17,9 +17,15 @@ function Mods() {
     <div className="flex flex-col mx-4 my-2">
       <div className="text-3xl font-bold text-white">Mods</div>
       <div className="bg-black rounded-lg w-full mt-2 h-[2px]" />
-      <div className="mt-2 flex flex-row gap-2">
+      <div className="mt-2 flex flex-row gap-2 border-2 border-black rounded-lg p-4 bg-gray-400">
         <div className="flex flex-col gap-2 w-full">
           <h1 className="text-lg text-white font-bold">Activated</h1>
+          <span className="font-bold">
+            Total:{' '}
+            <span className="text-white">
+              {modList && modList.activated.length}
+            </span>
+          </span>
           {modList &&
             modList.activated.map((mod) => {
               return (
@@ -45,6 +51,12 @@ function Mods() {
         </div>
         <div className="flex flex-col gap-2 w-full">
           <h1 className="text-lg text-white font-bold">Deactivated</h1>
+          <span className="font-bold">
+            Total:{' '}
+            <span className="text-white">
+              {modList && modList.deactivated.length}
+            </span>
+          </span>
           {modList &&
             modList.deactivated.map((mod) => {
               return (
