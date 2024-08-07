@@ -1,7 +1,5 @@
 /* eslint no-console: "off" */
 
-import { useEffect } from 'react';
-
 function Maps(props) {
   const { mapCache, setMapCache, setMaps, setSelectedMap, maps, selectedMap } =
     props;
@@ -10,8 +8,6 @@ function Maps(props) {
     window.electron.ipcRenderer.selectMap(map);
     setSelectedMap(map);
   };
-
-  useEffect(() => {}, []);
 
   return (
     <div className="flex flex-col w-full px-4 py-4 no-scrollbar">

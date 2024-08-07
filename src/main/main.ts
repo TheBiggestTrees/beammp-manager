@@ -99,8 +99,8 @@ ipcMain.handle('getModList', async () => {
   const deactivated = await fs.promises.readdir(
     `${Directory()}\\Resources\\Client\\deactivated_mods`
   );
-  const res = { ...activated, deactivated: { ...deactivated } };
-  return res;
+  const modList = { activated: [...activated], deactivated: [...deactivated] };
+  return modList;
 });
 
 ipcMain.on('selectMap', (event, arg) => {
@@ -125,6 +125,20 @@ ipcMain.handle('getSelectedMap', async () => {
     return userconfig.selectedMap;
   }
   return false;
+});
+
+ipcMain.on('deactivateMod', (event, arg) => {
+  // move file specified by arg to deactivated_mods folder from `{Directory()}/Resources/Client` folder
+  const from = `${Directory()}/Resources/Client/${arg}`;
+  const to = `${Directory()}/Resources/Client/deactivated_mods/${arg}`;
+  fs.renameSync(from, to);
+});
+
+ipcMain.on('activateMod', (event, arg) => {
+  // move file specified by arg to deactivated_mods folder from `{Directory()}/Resources/Client` folder
+  const from = `${Directory()}/Resources/Client/deactivated_mods/${arg}`;
+  const to = `${Directory()}/Resources/Client/${arg}`;
+  fs.renameSync(from, to);
 });
 
 ipcMain.on('executeServer', async (event, arg) => {

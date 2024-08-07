@@ -31,5 +31,7 @@ contextBridge.exposeInMainWorld('electron', {
     getServerSettings: () => ipcRenderer.invoke('getServerSettings'),
     setServerSettings: (arg) => ipcRenderer.send('setServerSettings', arg),
     getModList: () => ipcRenderer.invoke('getModList'),
+    activateMod: (arg) => ipcRenderer.send('activateMod', arg),
+    deactivateMod: (arg) => ipcRenderer.send('deactivateMod', arg),
   },
 });
