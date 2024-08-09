@@ -4,6 +4,8 @@ import './App.css';
 import LinkButton from './components/LinkButton';
 import ServerController from './components/ServerController';
 import Home from './pages/Home';
+import Maps from './pages/Maps';
+import Mods from './pages/Mods';
 import Settings from './pages/Settings';
 import AppProvider from './providers/app';
 
@@ -56,31 +58,51 @@ export default function App() {
     <AppProvider>
       <Router>
         <div className="flex flex-col">
-          <div className="flex flex-row justify-between items-center px-4">
-            <div className="flex gap-2">
-              <LinkButton to="" text="Home" />
-              <LinkButton to="settings" text="Settings" />
+          <div className="flex flex-row justify-between items-end m-4">
+            <div className="flex flex-row gap-4">
+              <LinkButton
+                to=""
+                text="Home"
+                stylings="text-3xl text-white font-bold"
+              />
+              <LinkButton
+                to="maps"
+                text="Maps"
+                stylings="text-3xl text-white font-bold"
+              />
+              <LinkButton
+                to="mods"
+                text="Mods"
+                stylings="text-3xl text-white font-bold"
+              />
+              <LinkButton
+                to="settings"
+                text="Settings"
+                stylings="text-3xl text-white font-bold"
+              />
             </div>
             <ServerController />
           </div>
           <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  mapCache={mapCache}
-                  setMapCache={setMapCache}
-                  maps={maps}
-                  selectedMap={selectedMap}
-                  setSelectedMap={setSelectedMap}
-                  setMaps={setMaps}
-                />
-              }
-            />
+            <Route path="/" element={<Home />} />
             <Route
               path="/settings"
               element={<Settings folder={folder} setFolder={setFolder} />}
             />
+            <Route
+              path="/maps"
+              element={
+                <Maps
+                  mapCache={mapCache}
+                  setMapCache={setMapCache}
+                  setMaps={setMaps}
+                  setSelectedMap={setSelectedMap}
+                  maps={maps}
+                  selectedMap={selectedMap}
+                />
+              }
+            />
+            <Route path="/mods" element={<Mods />} />
           </Routes>
         </div>
       </Router>

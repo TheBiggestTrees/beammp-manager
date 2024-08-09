@@ -22,7 +22,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "cross-env NODE_ENV=development eslint --cache"
+      "cross-env NODE_ENV=development .eslintignore --cache"
     ],
     "*.json,.{eslintrc,prettierrc}": [
       "prettier --ignore-path .eslintignore --parser json --write"
@@ -78,7 +78,11 @@
     ]
   },
   "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
     "@iarna/toml": "^2.2.5",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/material": "^5.16.7",
     "@std/toml": "npm:@jsr/std__toml@^1.0.0-rc.4",
     "@zip-js/zip-js": "npm:@jsr/zip-js__zip-js@^2.7.48",
     "adm-zip": "^0.5.14",

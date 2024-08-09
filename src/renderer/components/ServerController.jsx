@@ -1,4 +1,5 @@
 /* eslint no-console: "off" */
+import { PlayArrow, Refresh, Stop } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 
 // move controller
@@ -24,6 +25,16 @@ const ServerController = () => {
     }, 1000);
   };
 
+  const StartStopFunction = () => {
+    if (status === 'Online') {
+      console.log(status, 'Server Stopping...');
+      Controller('stop');
+    } else {
+      console.log(status, 'Server Starting...');
+      Controller('start');
+    }
+  };
+
   useEffect(() => {
     GameCheck();
 
@@ -37,7 +48,7 @@ const ServerController = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2 border-2 w-[320px] mt-2 border-black rounded-lg p-2 bg-gray-400">
+    <div className="flex flex-row items-center gap-2 p-2 bg-gray-400 rounded-lg border-2 border-black">
       <span
         className={
           status === 'Online'
@@ -47,29 +58,27 @@ const ServerController = () => {
       >
         {status}
       </span>
-      <div className="flex gap-2 ">
+      <button
+        type="button"
+        className={
+          status === 'Online'
+            ? 'bg-white text-red-500 w-8 h-8 border-2 border-black rounded-lg'
+            : 'bg-white text-green-600 w-8 h-8 border-2 border-black rounded-lg'
+        }
+        onClick={() => StartStopFunction()}
+      >
+        {status === 'Online' ? <Stop /> : <PlayArrow />}
+      </button>
+      {status === 'Online' && (
         <button
           type="button"
-          className="bg-white w-24 h-8 border-2 border-black rounded-lg"
-          onClick={() => Controller('start')}
-        >
-          Start
-        </button>
-        <button
-          type="button"
-          className="bg-white w-24 h-8 border-2 border-black rounded-lg"
-          onClick={() => Controller('stop')}
-        >
-          Stop
-        </button>
-        <button
-          type="button"
-          className="bg-white w-24 h-8 border-2 border-black rounded-lg"
+          className="bg-white text-blue-600 w-8 h-8 border-2 border-black rounded-lg"
           onClick={() => Controller('restart')}
+          disabled={status !== 'Online'}
         >
-          Restart
+          <Refresh />
         </button>
-      </div>
+      )}
     </div>
   );
 };

@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import GeneralServerSettings from 'renderer/components/GeneralServerSettings';
-import Maps from 'renderer/components/Maps';
-import Mods from 'renderer/components/Mods';
 
-function Home(props) {
-  const { mapCache, setMapCache, setMaps, setSelectedMap, maps, selectedMap } =
-    props;
+function Home() {
   const [serverSettings, setServerSettings] = useState(null);
 
   useEffect(() => {
@@ -26,16 +22,7 @@ function Home(props) {
               serverSettings={serverSettings}
               setServerSettings={setServerSettings}
             />
-            <Mods />
           </div>
-          <Maps
-            mapCache={mapCache}
-            setMapCache={setMapCache}
-            setMaps={setMaps}
-            setSelectedMap={setSelectedMap}
-            maps={maps}
-            selectedMap={selectedMap}
-          />
         </>
       ) : (
         <div>
