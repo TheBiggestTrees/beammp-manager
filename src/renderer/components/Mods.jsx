@@ -1,14 +1,22 @@
+/* eslint no-console: "off" */
 import { useEffect, useState } from 'react';
 
 function Mods() {
   const [modList, setModList] = useState(null);
+  const [modImages, setModImages] = useState(null);
 
   useEffect(() => {
     window.electron.ipcRenderer
       .getModList()
       .then((res) => {
-        console.log(res);
         return setModList(res);
+      })
+      .catch((err) => console.error(err));
+
+    window.electron.ipcRenderer
+      .GetModPictures()
+      .then((res) => {
+        return res;
       })
       .catch((err) => console.error(err));
   }, []);

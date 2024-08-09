@@ -20,7 +20,7 @@ import {
   ExecuteServer,
   getMaps,
 } from '../executer';
-import GetFolderNames from './helper/zip';
+import { GetFolderNames, GetModPictures } from './helper/zip';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
@@ -125,6 +125,14 @@ ipcMain.handle('getSelectedMap', async () => {
     return userconfig.selectedMap;
   }
   return false;
+});
+
+ipcMain.handle('getModPictures', async () => {
+  const pathD = Directory();
+  const files = `${pathD}\\Resources\\Client\\`;
+  const res = GetModPictures(files);
+
+  return res;
 });
 
 ipcMain.on('deactivateMod', (event, arg) => {

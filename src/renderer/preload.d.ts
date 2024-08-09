@@ -18,6 +18,7 @@ declare global {
         getSelectedMap(): void;
         getServerSettings(): void;
         setServerSettings(): void;
+        getModPictures(): void;
       };
     };
   }
