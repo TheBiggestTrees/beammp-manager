@@ -1,7 +1,17 @@
 import { useEffect, useState } from 'react';
 import GeneralServerSettings from 'renderer/components/GeneralServerSettings';
+import Mods from './Mods';
 
-function Home() {
+function Home(props) {
+  const {
+    mapCache,
+    setMapCache,
+    setMaps,
+    setSelectedMap,
+    maps,
+    selectedMap,
+    layout,
+  } = props;
   const [serverSettings, setServerSettings] = useState(null);
 
   useEffect(() => {
@@ -17,11 +27,22 @@ function Home() {
     <>
       {serverSettings !== null ? (
         <>
-          <div className="flex ml-4">
-            <GeneralServerSettings
-              serverSettings={serverSettings}
-              setServerSettings={setServerSettings}
-            />
+          <div className="bg-black rounded-lg h-[2px] mx-4" />
+          <div className="flex flex-row gap-2">
+            <div className="flex ml-4 w-full">
+              <GeneralServerSettings
+                serverSettings={serverSettings}
+                setServerSettings={setServerSettings}
+                mapCache={mapCache}
+                setMapCache={setMapCache}
+                setMaps={setMaps}
+                setSelectedMap={setSelectedMap}
+                maps={maps}
+                selectedMap={selectedMap}
+                layout={layout}
+              />
+            </div>
+            {layout === 'alternate' && <Mods />}
           </div>
         </>
       ) : (

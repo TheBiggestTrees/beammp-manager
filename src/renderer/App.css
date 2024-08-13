@@ -15,4 +15,12 @@
 
 :root {
   background-color: #6b7280;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  height: 100vh;
+  overflow: hidden;
+}
+
+:root::-webkit-scrollbar {
+  display: none;
 }

@@ -15,6 +15,7 @@ export default function App() {
   const [selectedMap, setSelectedMap] = useState('');
   const [folder, setFolder] = useState('');
   const [selectedPage, setSelectedPage] = useState('home');
+  const [layout, setLayout] = useState('default');
 
   const defaultMaps = [
     'gridmap',
@@ -48,6 +49,7 @@ export default function App() {
         .getSelectedMap()
         .then((res) => setSelectedMap(res))
         .catch((err) => console.error(err));
+      window.electron.ipcRenderer.getLayout().then((res) => setLayout(res));
     }
   };
 
@@ -71,26 +73,31 @@ export default function App() {
                 }
                 onClick={() => setSelectedPage('home')}
               />
-              <LinkButton
-                to="maps"
-                text="Maps"
-                stylings={
-                  selectedPage === 'maps'
-                    ? `text-3xl font-bold text-orange-500`
-                    : `text-3xl font-bold text-white`
-                }
-                onClick={() => setSelectedPage('maps')}
-              />
-              <LinkButton
-                to="mods"
-                text="Mods"
-                stylings={
-                  selectedPage === 'mods'
-                    ? `text-3xl font-bold text-orange-500`
-                    : `text-3xl font-bold text-white`
-                }
-                onClick={() => setSelectedPage('mods')}
-              />
+              {layout === 'default' && (
+                <>
+                  {' '}
+                  <LinkButton
+                    to="maps"
+                    text="Maps"
+                    stylings={
+                      selectedPage === 'maps'
+                        ? `text-3xl font-bold text-orange-500`
+                        : `text-3xl font-bold text-white`
+                    }
+                    onClick={() => setSelectedPage('maps')}
+                  />
+                  <LinkButton
+                    to="mods"
+                    text="Mods"
+                    stylings={
+                      selectedPage === 'mods'
+                        ? `text-3xl font-bold text-orange-500`
+                        : `text-3xl font-bold text-white`
+                    }
+                    onClick={() => setSelectedPage('mods')}
+                  />
+                </>
+              )}
               <LinkButton
                 to="settings"
                 text="Settings"
@@ -105,10 +112,19 @@ export default function App() {
             <ServerController />
           </div>
           <Routes>
-            <Route path="/" element={<Home />} />
             <Route
-              path="/settings"
-              element={<Settings folder={folder} setFolder={setFolder} />}
+              path="/"
+              element={
+                <Home
+                  mapCache={mapCache}
+                  setMapCache={setMapCache}
+                  setMaps={setMaps}
+                  setSelectedMap={setSelectedMap}
+                  maps={maps}
+                  selectedMap={selectedMap}
+                  layout={layout}
+                />
+              }
             />
             <Route
               path="/maps"
@@ -120,10 +136,23 @@ export default function App() {
                   setSelectedMap={setSelectedMap}
                   maps={maps}
                   selectedMap={selectedMap}
+                  layout={layout}
                 />
               }
             />
-            <Route path="/mods" element={<Mods />} />
+            <Route
+              path="/settings"
+              element={
+                <Settings
+                  folder={folder}
+                  setFolder={setFolder}
+                  layout={layout}
+                  setLayout={setLayout}
+                />
+              }
+            />
+
+            <Route path="/mods" element={<Mods layout={layout} />} />
           </Routes>
         </div>
       </Router>
