@@ -52,6 +52,19 @@ ipcMain.on('SetFolder', (event, arg) => {
   fs.writeFileSync('userconfig.json', JSON.stringify(userconfig, null, 4));
 });
 
+ipcMain.on('setLayout', (event, arg) => {
+  userconfig = {
+    ...userconfig,
+    layout: arg,
+  };
+  fs.writeFileSync('userconfig.json', JSON.stringify(userconfig, null, 4));
+});
+
+ipcMain.handle('getLayout', (event, arg) => {
+  const res = userconfig.layout;
+  return res;
+});
+
 ipcMain.on('setBackground', (event, arg) => {
   userconfig = {
     ...userconfig,

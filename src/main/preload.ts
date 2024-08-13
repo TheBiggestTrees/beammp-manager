@@ -34,5 +34,7 @@ contextBridge.exposeInMainWorld('electron', {
     activateMod: (arg) => ipcRenderer.send('activateMod', arg),
     deactivateMod: (arg) => ipcRenderer.send('deactivateMod', arg),
     GetModPictures: () => ipcRenderer.invoke('getModPictures'),
+    setLayout: (arg) => ipcRenderer.send('setLayout', arg),
+    getLayout: () => ipcRenderer.invoke('getLayout'),
   },
 });

@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 
 function Settings(props) {
-  const { folder, setFolder } = props;
+  const { folder, setFolder, layout, setLayout } = props;
   const [background, setBackground] = useState(false);
 
   useEffect(() => {
@@ -33,6 +33,13 @@ function Settings(props) {
       .catch((err) => console.error(err));
   };
 
+  const toggleLayout = () => {
+    window.electron.ipcRenderer.setLayout(
+      layout === 'default' ? 'alternate' : 'default'
+    );
+    setLayout(layout === 'default' ? 'alternate' : 'default');
+  };
+
   return (
     <div className="flex flex-col px-4">
       <div className="bg-black rounded-lg w-full h-[2px]" />
@@ -47,6 +54,19 @@ function Settings(props) {
           type="button"
         >
           {background ? 'Yes' : 'No'}
+        </button>
+      </div>
+      <div className="flex gap-2 items-center mb-4">
+        <span>Layout: </span>
+        <button
+          className="bg-white w-24 h-8 border-2 border-black rounded-lg"
+          onClick={(e) => {
+            e.preventDefault();
+            toggleLayout();
+          }}
+          type="button"
+        >
+          {layout}
         </button>
       </div>
       <div className="flex items-center gap-2">

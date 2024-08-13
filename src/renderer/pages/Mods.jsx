@@ -1,7 +1,8 @@
 /* eslint no-console: "off" */
 import { useEffect, useState } from 'react';
 
-function Mods() {
+function Mods(props) {
+  const { layout } = props;
   const [modList, setModList] = useState(null);
   const [modImages, setModImages] = useState(null);
 
@@ -16,8 +17,15 @@ function Mods() {
   }, []);
 
   return (
-    <div className="flex flex-col w-full mr-4">
-      <h1 className="text-lg text-white font-bold mt-2">Mods</h1>
+    <div
+      className={`flex flex-col ${layout === 'alternate' ? 'w-full' : 'mx-4'}`}
+    >
+      {layout === 'alternate' && (
+        <h1 className="text-lg text-white font-bold mt-2">Mods</h1>
+      )}
+      {layout === 'default' && (
+        <div className="bg-black h-[2px] rounded-lg"></div>
+      )}
       <div className=" h-[82vh] mt-2 flex flex-row gap-2 border-2 border-black rounded-lg p-4 bg-gray-400">
         <div className="flex flex-col w-full">
           <h1 className="text-lg text-white font-bold">Activated</h1>

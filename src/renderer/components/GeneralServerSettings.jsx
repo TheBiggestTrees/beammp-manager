@@ -11,6 +11,7 @@ function GeneralServerSettings(props) {
     setMaps,
     setSelectedMap,
     maps,
+    layout,
     selectedMap,
   } = props;
 
@@ -178,14 +179,16 @@ function GeneralServerSettings(props) {
           </div>
         </div>
       </div>
-      <Maps
-        mapCache={mapCache}
-        setMapCache={setMapCache}
-        setMaps={setMaps}
-        setSelectedMap={setSelectedMap}
-        maps={maps}
-        selectedMap={selectedMap}
-      />
+      {layout === 'alternate' && (
+        <Maps
+          mapCache={mapCache}
+          setMapCache={setMapCache}
+          setMaps={setMaps}
+          setSelectedMap={setSelectedMap}
+          maps={maps}
+          selectedMap={selectedMap}
+        />
+      )}
     </div>
   );
 }

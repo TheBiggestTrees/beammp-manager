@@ -1,8 +1,15 @@
 /* eslint no-console: "off" */
 
 function Maps(props) {
-  const { mapCache, setMapCache, setMaps, setSelectedMap, maps, selectedMap } =
-    props;
+  const {
+    mapCache,
+    setMapCache,
+    setMaps,
+    setSelectedMap,
+    maps,
+    selectedMap,
+    layout,
+  } = props;
 
   const SelectMap = (map) => {
     window.electron.ipcRenderer.selectMap(map);
@@ -10,9 +17,15 @@ function Maps(props) {
   };
 
   return (
-    <div className="flex flex-col min-h-[20%] max-h-[50%] no-scrollbar">
-      {/* <div className="bg-black rounded-lg h-[2px]" /> */}
-      <h1 className="text-lg text-white font-bold">Maps</h1>
+    <div
+      className={`flex flex-col min-h-[20%] max-h-[50%] no-scrollbar ${
+        layout === 'default' ? 'mx-4' : 'w-full'
+      }`}
+    >
+      {layout === 'default' && <div className="bg-black rounded-lg h-[2px]" />}
+      {layout === 'alternate' && (
+        <h1 className="text-lg text-white font-bold">Maps</h1>
+      )}
       <span className="font-bold">
         Total: <span className="text-white">{maps.length}</span>
       </span>
