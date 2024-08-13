@@ -10,15 +10,16 @@ function Maps(props) {
   };
 
   return (
-    <div className="flex flex-col w-full px-4 no-scrollbar">
-      <div className="bg-black rounded-lg h-[2px]" />
+    <div className="flex flex-col min-h-[25%] no-scrollbar">
+      {/* <div className="bg-black rounded-lg h-[2px]" /> */}
+      <h1 className="text-lg text-white font-bold">Maps</h1>
       <span className="font-bold">
         Total: <span className="text-white">{maps.length}</span>
       </span>
       <div className="flex items-center justify-center text-white bg-slate-600 border-2 border-black rounded-lg mb-2">
         {selectedMap}
       </div>
-      <div className="flex flex-col gap-2 h-[65vh] mb-2 overflow-auto no-scrollbar">
+      <div className="flex flex-col gap-2  overflow-auto no-scrollbar">
         {maps.map((map) => {
           if (map !== selectedMap) {
             return (

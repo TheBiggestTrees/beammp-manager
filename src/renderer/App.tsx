@@ -4,7 +4,6 @@ import './App.css';
 import LinkButton from './components/LinkButton';
 import ServerController from './components/ServerController';
 import Home from './pages/Home';
-import Maps from './pages/Maps';
 import Mods from './pages/Mods';
 import Settings from './pages/Settings';
 import AppProvider from './providers/app';
@@ -71,7 +70,7 @@ export default function App() {
                 }
                 onClick={() => setSelectedPage('home')}
               />
-              <LinkButton
+              {/* <LinkButton
                 to="maps"
                 text="Maps"
                 stylings={
@@ -90,7 +89,7 @@ export default function App() {
                     : `text-3xl font-bold text-white`
                 }
                 onClick={() => setSelectedPage('mods')}
-              />
+              /> */}
               <LinkButton
                 to="settings"
                 text="Settings"
@@ -105,15 +104,10 @@ export default function App() {
             <ServerController />
           </div>
           <Routes>
-            <Route path="/" element={<Home />} />
             <Route
-              path="/settings"
-              element={<Settings folder={folder} setFolder={setFolder} />}
-            />
-            <Route
-              path="/maps"
+              path="/"
               element={
-                <Maps
+                <Home
                   mapCache={mapCache}
                   setMapCache={setMapCache}
                   setMaps={setMaps}
@@ -123,6 +117,11 @@ export default function App() {
                 />
               }
             />
+            <Route
+              path="/settings"
+              element={<Settings folder={folder} setFolder={setFolder} />}
+            />
+
             <Route path="/mods" element={<Mods />} />
           </Routes>
         </div>

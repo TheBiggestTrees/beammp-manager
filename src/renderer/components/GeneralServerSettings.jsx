@@ -1,17 +1,26 @@
 import { useState } from 'react';
+import Maps from 'renderer/pages/Maps';
 import SettingTextBox from './SettingTextBox';
 
 function GeneralServerSettings(props) {
-  const { serverSettings, setServerSettings } = props;
+  const {
+    serverSettings,
+    setServerSettings,
+    mapCache,
+    setMapCache,
+    setMaps,
+    setSelectedMap,
+    maps,
+    selectedMap,
+  } = props;
 
   const [settingsChanged, setSettingsChanged] = useState(false);
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="bg-black rounded-lg h-[2px]" />
-
-      <div className="flex flex-col gap-2 mt-4">
-        <div className="flex justify-between items-start">
+    <div className="flex flex-col">
+      <div className="bg-black rounded-lg h-[2px] mr-4" />
+      <div className="flex flex-col">
+        <div className="flex flex-col gap-2 mt-4 ">
           <div className="flex gap-2">
             <div className="flex flex-col gap-2">
               <SettingTextBox
@@ -40,7 +49,8 @@ function GeneralServerSettings(props) {
                 value={serverSettings.General.MaxPlayers}
                 generalValue="MaxPlayers"
                 type="number"
-                width="w-16"
+                width="w-16 "
+                wrapper="number:items-center justify-center"
                 setSettingsChanged={setSettingsChanged}
               />
               <SettingTextBox
@@ -50,6 +60,7 @@ function GeneralServerSettings(props) {
                 generalValue="MaxCars"
                 type="number"
                 width="w-16"
+                wrapper="number:items-center justify-center"
                 setSettingsChanged={setSettingsChanged}
               />
             </div>
@@ -61,19 +72,9 @@ function GeneralServerSettings(props) {
                 generalValue="Port"
                 type="number"
                 width="w-16"
+                wrapper="number:items-center justify-center"
                 setSettingsChanged={setSettingsChanged}
               />
-              <SettingTextBox
-                setServerSettings={setServerSettings}
-                text="Log Chat"
-                value={serverSettings.General.LogChat}
-                generalValue="LogChat"
-                type="button"
-                width="w-16 h-7"
-                setSettingsChanged={setSettingsChanged}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
               <SettingTextBox
                 setServerSettings={setServerSettings}
                 text="Private"
@@ -81,20 +82,79 @@ function GeneralServerSettings(props) {
                 generalValue="Private"
                 type="button"
                 width="w-16 h-7"
-                setSettingsChanged={setSettingsChanged}
-              />
-
-              <SettingTextBox
-                setServerSettings={setServerSettings}
-                text="Debug"
-                value={serverSettings.General.Debug}
-                generalValue="Debug"
-                type="button"
-                width="w-16 h-7"
+                wrapper="number:items-center justify-center text-center"
                 setSettingsChanged={setSettingsChanged}
               />
             </div>
-            <div className="flex flex-col gap-2">
+          </div>
+
+          <div className="flex flex-col gap-2 ">
+            <div className="flex flex-row gap-2">
+              <div className="flex flex-col gap-2">
+                <SettingTextBox
+                  text="Description"
+                  setServerSettings={setServerSettings}
+                  value={serverSettings.General.Description}
+                  generalValue="Description"
+                  type="textarea"
+                  setSettingsChanged={setSettingsChanged}
+                />
+                <SettingTextBox
+                  setServerSettings={setServerSettings}
+                  text="Tags"
+                  value={serverSettings.General.Tags}
+                  generalValue="Tags"
+                  type="textarea"
+                  setSettingsChanged={setSettingsChanged}
+                />
+                {settingsChanged && (
+                  <button
+                    className="bg-green-400 w-24 h-8 border-2 mr-8 border-black rounded-lg "
+                    type="button"
+                    onClick={() => {
+                      window.electron.ipcRenderer.setServerSettings(
+                        serverSettings
+                      );
+                      setSettingsChanged(false);
+                    }}
+                  >
+                    Save
+                  </button>
+                )}
+              </div>
+              <div className="flex flex-col gap-2">
+                <SettingTextBox
+                  setServerSettings={setServerSettings}
+                  text="Log Chat"
+                  value={serverSettings.General.LogChat}
+                  generalValue="LogChat"
+                  type="button"
+                  width="w-16 h-7"
+                  setSettingsChanged={setSettingsChanged}
+                />
+
+                <SettingTextBox
+                  setServerSettings={setServerSettings}
+                  text="Debug"
+                  value={serverSettings.General.Debug}
+                  generalValue="Debug"
+                  type="button"
+                  width="w-16 h-7"
+                  setSettingsChanged={setSettingsChanged}
+                />
+                <SettingTextBox
+                  setServerSettings={setServerSettings}
+                  text="Send Errors"
+                  value={serverSettings.Misc.SendErrors}
+                  generalValue="SendErrors"
+                  misc
+                  type="button"
+                  width="w-16 h-7"
+                  setSettingsChanged={setSettingsChanged}
+                />
+              </div>
+            </div>
+            {/* <div className="flex flex-row gap-2">
               <SettingTextBox
                 setServerSettings={setServerSettings}
                 text={`I'm Scared Of Updates`}
@@ -115,53 +175,18 @@ function GeneralServerSettings(props) {
                 width="w-16 h-7"
                 setSettingsChanged={setSettingsChanged}
               />
-            </div>
-            <div className="flex flex-col gap-2">
-              <SettingTextBox
-                setServerSettings={setServerSettings}
-                text="Send Errors"
-                value={serverSettings.Misc.SendErrors}
-                generalValue="SendErrors"
-                misc
-                type="button"
-                width="w-16 h-7"
-                setSettingsChanged={setSettingsChanged}
-              />
-            </div>
+            </div> */}
           </div>
-          {settingsChanged && (
-            <button
-              className="bg-green-400 w-24 h-8 border-2 mr-8 border-black rounded-lg "
-              type="button"
-              onClick={() => {
-                window.electron.ipcRenderer.setServerSettings(serverSettings);
-                setSettingsChanged(false);
-              }}
-            >
-              Save
-            </button>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <SettingTextBox
-            text="Description"
-            setServerSettings={setServerSettings}
-            value={serverSettings.General.Description}
-            generalValue="Description"
-            type="textarea"
-            setSettingsChanged={setSettingsChanged}
-          />
-          <SettingTextBox
-            setServerSettings={setServerSettings}
-            text="Tags"
-            value={serverSettings.General.Tags}
-            generalValue="Tags"
-            type="textarea"
-            setSettingsChanged={setSettingsChanged}
-          />
         </div>
       </div>
+      <Maps
+        mapCache={mapCache}
+        setMapCache={setMapCache}
+        setMaps={setMaps}
+        setSelectedMap={setSelectedMap}
+        maps={maps}
+        selectedMap={selectedMap}
+      />
     </div>
   );
 }
