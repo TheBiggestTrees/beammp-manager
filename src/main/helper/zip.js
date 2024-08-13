@@ -15,14 +15,19 @@ const GetFolderNames = async (filePath) => {
   return zipFolders[1].split('/')[1];
 };
 
-const GetImageFromZip = async (filePath) => {
+const GetModPictures = (filePath, root) => {
+  console.log(root);
+  // filePath =  `J:\\BeamMP\\resources\\client\\custom_mod.zip`
   // open the zip
   const zip = new AdmZip(filePath);
 
   // extract the contents of the mod_info/*/images folder
+  // get entries
   const entries = zip.getEntries();
+  // create empty array for images
   const images = [];
 
+  // loop through entries
   const entryNameArray = entries.forEach((entry) => {
     if (
       entry.entryName.includes('mod_info' && '/images' && ('.png' || '.jpg'))
@@ -33,36 +38,19 @@ const GetImageFromZip = async (filePath) => {
     }
   });
 
-  if (images) {
-    const firstImage = images[0];
-    if (firstImage) {
-      const imagePath = path.join(filePath, firstImage);
-      const imageBuffer = await fs.promises.readFile(imagePath);
-      // const imageBase64 = imageBuffer.toString('base64');
-
-      console.log(imageBuffer);
-
-      // const imageURL = `data:image/${
-      //   firstImage.split('.')[1]
-      // };base64,${imageBase64}`;
-      // return imageURL;
+  if (images.length > 0) {
+    const firstImagePath = images[0];
+    const imageFile = firstImagePath.split('/')[3];
+    const fileExists = fs.existsSync(`${root}/image_cache/${imageFile}`);
+    //check if the image exists in ./image_cache
+    if (!fileExists) {
+      // download the image
+      zip.extractEntryTo(firstImagePath, `${root}/image_cache`, false, true);
     }
+    return `${root}/image_cache/${imageFile}`;
+  } else {
+    return `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROCUtTGbskK6E3lU-aeNtcNjGKUu4YTwzRpg&s`;
   }
-};
-
-const GetModPictures = async (zipdirectory) => {
-  const files = await fs.promises.readdir(zipdirectory);
-  const filesNoFolders = files.filter((file) => !file.includes('/'));
-  GetImageFromZip(`${zipdirectory}/${filesNoFolders[0]}`);
-  // const res = filesNoFolders.map((file) => {
-  //   const filePath = `${zipdirectory}/${file}`;
-  //   const image = GetImageFromZip(filePath);
-  //   if (image) {
-  //     return image;
-  //   }
-  //   return 'No Images';
-  // });
-  // return res;
 };
 
 module.exports = { GetFolderNames, GetModPictures };

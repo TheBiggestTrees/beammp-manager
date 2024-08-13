@@ -206,6 +206,7 @@
       ]
     },
     "win": {
+      "icon": "./assets/beammp_manager.jpg",
       "target": [
         "nsis"
       ]
@@ -241,7 +242,8 @@
     "patterns": [
       "!userconfig.json",
       "!src/__tests__/**",
-      "!release/**"
+      "!release/**",
+      "!image_cache/"
     ],
     "logLevel": "quiet"
   }

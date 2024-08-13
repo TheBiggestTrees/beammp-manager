@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
 function LinkButton(props) {
-  const { to, text, stylings } = props;
+  const { to, text, stylings, onClick } = props;
 
   if (!stylings) {
     return (
@@ -14,7 +14,9 @@ function LinkButton(props) {
   }
   return (
     <NavLink to={`/${to}`}>
-      <div className={stylings}>{text}</div>
+      <div className={stylings} onClick={onClick}>
+        {text}
+      </div>
     </NavLink>
   );
 }

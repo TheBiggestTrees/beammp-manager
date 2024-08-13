@@ -24,7 +24,7 @@ function GeneralServerSettings(props) {
       </div>
       <div className="bg-black rounded-lg h-[2px]" />
 
-      <div className="flex flex-col gap-2 mt-2">
+      <div className="flex flex-col gap-2 mt-4">
         <SettingTextBox
           setServerSettings={setServerSettings}
           text="Name"

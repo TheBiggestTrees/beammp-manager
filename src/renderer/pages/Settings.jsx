@@ -34,9 +34,9 @@ function Settings(props) {
   };
 
   return (
-    <div className="flex flex-col px-4 py-4">
-      <span className="text-white text-3xl font-bold">Settings</span>
-      <div className="flex gap-2 items-center">
+    <div className="flex flex-col px-4">
+      <div className="bg-black rounded-lg w-full h-[2px]" />
+      <div className="flex gap-2 items-center my-4">
         <span>Run in background: </span>
         <button
           className="bg-white w-24 h-8 border-2 border-black rounded-lg"

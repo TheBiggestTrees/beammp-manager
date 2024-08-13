@@ -14,6 +14,7 @@ export default function App() {
   const [maps, setMaps] = useState([]);
   const [selectedMap, setSelectedMap] = useState('');
   const [folder, setFolder] = useState('');
+  const [selectedPage, setSelectedPage] = useState('home');
 
   const defaultMaps = [
     'gridmap',
@@ -63,22 +64,42 @@ export default function App() {
               <LinkButton
                 to=""
                 text="Home"
-                stylings="text-3xl text-white font-bold"
+                stylings={
+                  selectedPage === 'home'
+                    ? `text-3xl font-bold text-orange-500`
+                    : `text-3xl font-bold text-white`
+                }
+                onClick={() => setSelectedPage('home')}
               />
               <LinkButton
                 to="maps"
                 text="Maps"
-                stylings="text-3xl text-white font-bold"
+                stylings={
+                  selectedPage === 'maps'
+                    ? `text-3xl font-bold text-orange-500`
+                    : `text-3xl font-bold text-white`
+                }
+                onClick={() => setSelectedPage('maps')}
               />
               <LinkButton
                 to="mods"
                 text="Mods"
-                stylings="text-3xl text-white font-bold"
+                stylings={
+                  selectedPage === 'mods'
+                    ? `text-3xl font-bold text-orange-500`
+                    : `text-3xl font-bold text-white`
+                }
+                onClick={() => setSelectedPage('mods')}
               />
               <LinkButton
                 to="settings"
                 text="Settings"
-                stylings="text-3xl text-white font-bold"
+                stylings={
+                  selectedPage === 'settings'
+                    ? `text-3xl font-bold text-orange-500`
+                    : `text-3xl font-bold text-white`
+                }
+                onClick={() => setSelectedPage('settings')}
               />
             </div>
             <ServerController />

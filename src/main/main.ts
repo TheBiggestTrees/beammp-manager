@@ -93,15 +93,140 @@ ipcMain.handle('getMaps', async () => {
 });
 
 ipcMain.handle('getModList', async () => {
-  const activated = await fs.promises.readdir(
-    `${Directory()}\\Resources\\Client`
-  );
-  const deactivated = await fs.promises.readdir(
-    `${Directory()}\\Resources\\Client\\deactivated_mods`
-  );
-  const modList = { activated: [...activated], deactivated: [...deactivated] };
-  return modList;
+  try {
+    const pathD = Directory();
+
+    const activated = await fs.promises.readdir(`${pathD}\\Resources\\Client`);
+    const deactivated = await fs.promises.readdir(
+      `${pathD}\\Resources\\Client\\deactivated_mods`
+    );
+
+    const activeListWImages = () => {
+      const activate = [];
+      const deactivate = [];
+
+      for (let i = 0; i < activated.length; i++) {
+        try {
+          const image = GetModPictures(
+            `${pathD}\\Resources\\Client\\${activated[i]}`,
+            pathD
+          );
+
+          if (image !== undefined) {
+            activate.push({
+              name: activated[i],
+              image: image,
+            });
+          }
+
+          if (image === undefined) {
+            activate.push({
+              name: activated[i],
+              image: undefined,
+            });
+          }
+        } catch (error) {
+          console.error(
+            `Error getting mod picture for ${activated[i]}:`,
+            error
+          );
+        }
+      }
+
+      for (let i = 0; i < deactivated.length; i++) {
+        try {
+          const image = GetModPictures(
+            `${pathD}\\Resources\\Client\\deactivated_mods\\${deactivated[i]}`,
+            pathD
+          );
+
+          if (image !== undefined) {
+            deactivate.push({
+              name: deactivated[i],
+              image: image,
+            });
+          }
+
+          if (image === undefined) {
+            deactivate.push({
+              name: deactivated[i],
+              image: undefined,
+            });
+          }
+        } catch (error) {
+          console.error(
+            `Error getting mod picture for ${deactivated[i]}:`,
+            error
+          );
+        }
+      }
+
+      const modList = {
+        activated: [...activate],
+        deactivated: [...deactivate],
+      };
+
+      return modList;
+    };
+
+    const List = activeListWImages();
+
+    console.log(List);
+    return List;
+  } catch (error) {
+    console.error('Error getting mod list:', error);
+    return null;
+  }
 });
+
+// ipcMain.handle('getModList', async () => {
+//   const pathD = Directory();
+
+//   const activated = await fs.promises.readdir(`${pathD}\\Resources\\Client`);
+//   const deactivated = await fs.promises.readdir(
+//     `${pathD}\\Resources\\Client\\deactivated_mods`
+//   );
+
+//   const activeListWImages = () => {
+//     const activate = [];
+//     const deactivate = [];
+
+//     for (let i = 0; i < activated.length; i++) {
+//       const image = GetModPictures(
+//         `${pathD}\\Resources\\Client\\${activated[i]}`
+//       );
+
+//       if (image !== undefined) {
+//         activate.push({
+//           name: activated[i],
+//           image: `./image_cache/${image}`,
+//         });
+//       }
+//     }
+
+//     for (let i = 0; i < deactivated.length; i++) {
+//       const image = GetModPictures(
+//         `${pathD}\\Resources\\Client\\deactivated_mods\\${deactivated[i]}`
+//       );
+
+//       if (image === undefined) {
+//         deactivate.push({
+//           name: deactivated[i],
+//           image: `./image_cache/${image}`,
+//         });
+//       }
+//     }
+
+//     const modList = { activated: [...activate], deactivated: [...deactivate] };
+
+//     return modList;
+//   };
+
+//   const List = activeListWImages();
+
+//   console.log(List);
+//   return List;
+// });
 
 ipcMain.on('selectMap', (event, arg) => {
   userconfig = fs.readFileSync('userconfig.json');
@@ -125,14 +250,6 @@ ipcMain.handle('getSelectedMap', async () => {
     return userconfig.selectedMap;
   }
   return false;
-});
-
-ipcMain.handle('getModPictures', async () => {
-  const pathD = Directory();
-  const files = `${pathD}\\Resources\\Client\\`;
-  const res = GetModPictures(files);
-
-  return res;
 });
 
 ipcMain.on('deactivateMod', (event, arg) => {
@@ -241,7 +358,7 @@ const createWindow = async () => {
     show: false,
     width: 1024,
     height: 728,
-    icon: getAssetPath('icon.png'),
+    icon: getAssetPath('beammp_manager.jpg'),
     webPreferences: {
       nodeIntegration: true,
       preload: app.isPackaged

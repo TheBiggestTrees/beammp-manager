@@ -10,8 +10,7 @@ function Maps(props) {
   };
 
   return (
-    <div className="flex flex-col w-full px-4 py-4 no-scrollbar">
-      <h1 className="text-3xl text-white font-bold mb-2">Maps</h1>
+    <div className="flex flex-col w-full px-4 no-scrollbar">
       <div className="bg-black rounded-lg h-[2px]" />
       <span className="font-bold">
         Total: <span className="text-white">{maps.length}</span>
