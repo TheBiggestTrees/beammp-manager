@@ -16,9 +16,9 @@ function Mods() {
   }, []);
 
   return (
-    <div className="flex flex-col mx-4">
-      <div className="bg-black rounded-lg w-full h-[2px]" />
-      <div className=" h-[80vh] mt-2 flex flex-row gap-2 border-2 border-black rounded-lg p-4 bg-gray-400">
+    <div className="flex flex-col w-full mr-4">
+      <h1 className="text-lg text-white font-bold mt-2">Mods</h1>
+      <div className=" h-[82vh] mt-2 flex flex-row gap-2 border-2 border-black rounded-lg p-4 bg-gray-400">
         <div className="flex flex-col w-full">
           <h1 className="text-lg text-white font-bold">Activated</h1>
           <span className="font-bold">
@@ -35,7 +35,7 @@ function Mods() {
                   <button
                     key={mod.name}
                     type="button"
-                    className="w-56 h-56 text-black px-2 bg-white border-2 border-black rounded-lg mb-2 flex flex-col items-center justify-center gap-2 py-4 overflow-hidden"
+                    className="w-44 h-44 text-black px-2 bg-white border-2 border-black rounded-lg mb-2 flex flex-col items-center justify-center gap-2 py-4 overflow-hidden"
                     onClick={() => {
                       window.electron.ipcRenderer.deactivateMod(mod.name);
                       window.electron.ipcRenderer
@@ -71,7 +71,7 @@ function Mods() {
                   <button
                     key={mod.name}
                     type="button"
-                    className="w-56 h-56 text-white px-2 bg-red-500 border-2 border-black rounded-lg mb-2 flex flex-col items-center justify-center gap-2 py-4 overflow-hidden"
+                    className="w-44 h-44 text-white px-2 bg-red-500 border-2 border-black rounded-lg mb-2 flex flex-col items-center justify-center gap-2 py-4 overflow-hidden"
                     onClick={() => {
                       window.electron.ipcRenderer.activateMod(mod.name);
                       window.electron.ipcRenderer

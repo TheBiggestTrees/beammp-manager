@@ -10,7 +10,7 @@ function Maps(props) {
   };
 
   return (
-    <div className="flex flex-col min-h-[25%] no-scrollbar">
+    <div className="flex flex-col min-h-[20%] max-h-[50%] no-scrollbar">
       {/* <div className="bg-black rounded-lg h-[2px]" /> */}
       <h1 className="text-lg text-white font-bold">Maps</h1>
       <span className="font-bold">

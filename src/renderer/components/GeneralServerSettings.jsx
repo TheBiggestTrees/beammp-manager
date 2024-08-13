@@ -17,8 +17,7 @@ function GeneralServerSettings(props) {
   const [settingsChanged, setSettingsChanged] = useState(false);
 
   return (
-    <div className="flex flex-col">
-      <div className="bg-black rounded-lg h-[2px] mr-4" />
+    <div className="flex flex-col w-full">
       <div className="flex flex-col">
         <div className="flex flex-col gap-2 mt-4 ">
           <div className="flex gap-2">
