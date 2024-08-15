@@ -65,6 +65,16 @@ ipcMain.handle('getLayout', (event, arg) => {
   return res;
 });
 
+ipcMain.handle('openModsFolder', (event, arg) => {
+  const directory = Directory();
+  shell.openPath(`${directory}\\Resources\\Client`);
+});
+
+ipcMain.handle('openMapsFolder', (event, arg) => {
+  const directory = Directory();
+  shell.openPath(`${directory}\\custom_maps`);
+});
+
 ipcMain.on('setBackground', (event, arg) => {
   userconfig = {
     ...userconfig,

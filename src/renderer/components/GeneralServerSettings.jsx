@@ -1,3 +1,4 @@
+import { Folder } from '@mui/icons-material';
 import { useState } from 'react';
 import Maps from 'renderer/pages/Maps';
 import SettingTextBox from './SettingTextBox';
@@ -17,10 +18,51 @@ function GeneralServerSettings(props) {
 
   const [settingsChanged, setSettingsChanged] = useState(false);
 
+  const handleClick = (action) => {
+    switch (action) {
+      case 'openModsFolder':
+        window.electron.ipcRenderer.openModsFolder();
+        break;
+      case 'openMapsFolder':
+        window.electron.ipcRenderer.openMapsFolder();
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col">
         <div className="flex flex-col gap-2 mt-4 ">
+          <div className="flex justify-around items-center">
+            <button
+              type="button"
+              className="bg-white font-bold text-lg border-2 border-black p-2 flex items-center justify-center rounded-lg"
+              onClick={() => handleClick('openModsFolder')}
+            >
+              <Folder className="text-gray-600" /> Open Mods Folder
+            </button>
+            <button
+              type="button"
+              className="bg-white font-bold text-lg border-2 border-black p-2 flex items-center justify-center rounded-lg"
+              onClick={() => handleClick('openMapsFolder')}
+            >
+              <Folder className="text-gray-600" /> Open Maps Folder
+            </button>
+            {settingsChanged && (
+              <button
+                className="bg-green-400 w-24 h-8 border-2 mr-8 border-black rounded-lg "
+                type="button"
+                onClick={() => {
+                  window.electron.ipcRenderer.setServerSettings(serverSettings);
+                  setSettingsChanged(false);
+                }}
+              >
+                Save
+              </button>
+            )}
+          </div>
           <div className="flex gap-2">
             <div className="flex flex-col gap-2">
               <SettingTextBox
@@ -107,20 +149,6 @@ function GeneralServerSettings(props) {
                   type="textarea"
                   setSettingsChanged={setSettingsChanged}
                 />
-                {settingsChanged && (
-                  <button
-                    className="bg-green-400 w-24 h-8 border-2 mr-8 border-black rounded-lg "
-                    type="button"
-                    onClick={() => {
-                      window.electron.ipcRenderer.setServerSettings(
-                        serverSettings
-                      );
-                      setSettingsChanged(false);
-                    }}
-                  >
-                    Save
-                  </button>
-                )}
               </div>
               <div className="flex flex-col gap-2">
                 <SettingTextBox
