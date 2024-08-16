@@ -18,8 +18,10 @@ function Maps(props) {
 
   return (
     <div
-      className={`flex flex-col min-h-[20%] max-h-[50%] no-scrollbar ${
-        layout === 'default' ? 'mx-4' : 'w-full'
+      className={`flex flex-col overflow-hidden  no-scrollbar ${
+        layout === 'default'
+          ? 'mx-4 h-[calc(100vh-100px)]'
+          : 'w-full h-[calc(100vh-475px)]'
       }`}
     >
       {layout === 'default' && <div className="bg-black rounded-lg h-[2px]" />}

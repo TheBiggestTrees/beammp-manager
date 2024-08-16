@@ -60,7 +60,7 @@ export default function App() {
   return (
     <AppProvider>
       <Router>
-        <div className="flex flex-col">
+        <>
           <div className="flex flex-row justify-between items-end m-4">
             <div className="flex flex-row gap-4">
               <LinkButton
@@ -111,6 +111,7 @@ export default function App() {
             </div>
             <ServerController />
           </div>
+
           <Routes>
             <Route
               path="/"
@@ -154,7 +155,7 @@ export default function App() {
 
             <Route path="/mods" element={<Mods layout={layout} />} />
           </Routes>
-        </div>
+        </>
       </Router>
     </AppProvider>
   );
