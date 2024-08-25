@@ -101,18 +101,9 @@ ipcMain.on('setServerSettings', (event, arg) => {
 
 ipcMain.handle('getMaps', async () => {
   const res = await getMaps();
-  const zippedFolders = [];
-  for (let i = 0; i < res.length; i++) {
-    try {
-      const zipFolders = await GetFolderNames(
-        `${Directory()}\\custom_maps\\${res[i]}`
-      );
-      zippedFolders.push(zipFolders);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  return zippedFolders;
+  console.log(res);
+
+  return res;
 });
 
 ipcMain.handle('getModList', async () => {
@@ -202,68 +193,156 @@ ipcMain.handle('getModList', async () => {
   }
 });
 
-// ipcMain.handle('getModList', async () => {
-//   const pathD = Directory();
+ipcMain.on('selectMap', async (event, arg) => {
+  const defaultMaps = [
+    'gridmap',
+    'gridmap_v2',
+    'automation_test_track',
+    'east_coast_usa',
+    'hirochi_raceway',
+    'italy',
+    'industrial',
+    'small_island',
+    'smallgrid',
+    'utah',
+    'west_coast_usa',
+    'driver_training',
+    'derby',
+    'jungle_rock_island',
+    'johnson_valley',
+  ];
 
-//   const activated = await fs.promises.readdir(`${pathD}\\Resources\\Client`);
-//   const deactivated = await fs.promises.readdir(
-//     `${pathD}\\Resources\\Client\\deactivated_mods`
-//   );
-
-//   const activeListWImages = () => {
-//     const activate = [];
-//     const deactivate = [];
-
-//     for (let i = 0; i < activated.length; i++) {
-//       const image = GetModPictures(
-//         `${pathD}\\Resources\\Client\\${activated[i]}`
-//       );
-
-//       if (image !== undefined) {
-//         activate.push({
-//           name: activated[i],
-//           image: `./image_cache/${image}`,
-//         });
-//       }
-//     }
-
-//     for (let i = 0; i < deactivated.length; i++) {
-//       const image = GetModPictures(
-//         `${pathD}\\Resources\\Client\\deactivated_mods\\${deactivated[i]}`
-//       );
-
-//       if (image === undefined) {
-//         deactivate.push({
-//           name: deactivated[i],
-//           image: `./image_cache/${image}`,
-//         });
-//       }
-//     }
-
-//     const modList = { activated: [...activate], deactivated: [...deactivate] };
-
-//     return modList;
-//   };
-
-//   const List = activeListWImages();
-
-//   console.log(List);
-//   return List;
-// });
-
-ipcMain.on('selectMap', (event, arg) => {
   userconfig = fs.readFileSync('userconfig.json');
-  const tomlconfig = fs.readFileSync(`${Directory()}/ServerConfig.toml`);
+  const pathD = Directory();
+  const tomlconfig = fs.readFileSync(`${pathD}/ServerConfig.toml`);
   const parsed = JSON.parse(userconfig);
   const parseToml = TOML.parse(tomlconfig);
-  const toml = TOML.stringify({
-    ...parseToml,
-    General: { ...parseToml.General, Map: `/levels/${arg}/info.json` },
-  });
-  const JSONstring = JSON.stringify({ ...parsed, selectedMap: arg }, null, 4);
-  fs.writeFileSync('userconfig.json', JSONstring);
+  let selected = parsed.selectedMap;
+  console.log(selected);
+  // const zipFolder = await GetFolderNames(
+  // `${pathD}\\custom_maps\\${}`
+  // );
 
-  fs.writeFileSync(`${Directory()}/ServerConfig.toml`, toml);
+  const defaultClickSaveConfig = () => {
+    const toml = TOML.stringify({
+      ...parseToml,
+      General: { ...parseToml.General, Map: `/levels/${arg}/info.json` },
+    });
+
+    const JSONstring = JSON.stringify({ ...parsed, selectedMap: arg }, null, 4);
+
+    fs.writeFileSync('userconfig.json', JSONstring);
+
+    fs.writeFileSync(`${pathD}/ServerConfig.toml`, toml);
+  };
+
+  const zipClickSaveConfig = async () => {
+    try {
+      const zipName = await GetFolderNames(
+        `${pathD}\\Resources\\Client\\${arg}`
+      );
+
+      const toml = TOML.stringify({
+        ...parseToml,
+        General: { ...parseToml.General, Map: `/levels/${zipName}/info.json` },
+      });
+
+      const JSONstring = JSON.stringify(
+        { ...parsed, selectedMap: arg },
+        null,
+        4
+      );
+
+      fs.writeFileSync('userconfig.json', JSONstring);
+
+      fs.writeFileSync(`${pathD}/ServerConfig.toml`, toml);
+    } catch (error) {
+      console.error('Error saving config:', error);
+    }
+  };
+
+  if (defaultMaps.includes(arg)) {
+    console.log('default map CLICKED', arg);
+
+    if (defaultMaps.includes(selected)) {
+      console.log('default map current', selected);
+
+      defaultClickSaveConfig();
+    } else {
+      console.log('zip map current', selected);
+
+      try {
+        const selectedZipName = await GetFolderNames(
+          `${pathD}\\Resources\\Client\\${selected}`
+        );
+
+        if (selectedZipName) {
+          console.log('selectedZipName: ', selectedZipName);
+          console.log('saving default clicked and zip selected');
+
+          // move file specified by selectedZipName to custom_maps folder from `{pathD}/Resources/Client` folder
+
+          const fromZip = `${pathD}\\Resources\\Client\\${selected}`;
+          const toZip = `${pathD}\\custom_maps\\${selected}`;
+          fs.renameSync(fromZip, toZip);
+
+          defaultClickSaveConfig();
+        }
+      } catch (error) {
+        console.error('Error getting zip folder name:', error);
+      }
+    }
+  } else if (!defaultMaps.includes(arg)) {
+    console.log('zip map CLICKED', arg);
+
+    if (defaultMaps.includes(selected)) {
+      console.log('default map current', selected);
+
+      // move file specified by arg to resources//client folder from `{pathD}/custom_maps` folder
+      const from = `${pathD}\\custom_maps\\${arg}`;
+      const to = `${pathD}\\Resources\\Client\\${arg}`;
+      fs.renameSync(from, to);
+
+      zipClickSaveConfig();
+    } else {
+      console.log('zip map current', selected);
+
+      try {
+        const selectedZipName = await GetFolderNames(
+          `${pathD}\\Resources\\Client\\${selected}`
+        );
+
+        if (selectedZipName) {
+          console.log('selectedZipName: ', selectedZipName);
+          console.log('saving zip clicked and zip selected');
+
+          // move file specified by arg to resources//client folder from `{pathD}/custom_maps` folder
+
+          const from = `${pathD}\\custom_maps\\${arg}`;
+          const to = `${pathD}\\Resources\\Client\\${arg}`;
+          fs.renameSync(from, to);
+
+          // move file specified by selectedZipName to custom_maps folder from `{pathD}/Resources/Client` folder
+
+          const fromZip = `${pathD}\\Resources\\Client\\${selected}`;
+          const toZip = `${pathD}\\custom_maps\\${selected}`;
+          fs.renameSync(fromZip, toZip);
+
+          zipClickSaveConfig();
+        }
+      } catch (error) {
+        console.error('Error getting zip folder name:', error);
+      }
+    }
+  }
+
+  // zipFolArr = ['gtavc', 'libertycity'];
+  // selected = 'motorsports_playground';
+  // selectedZip = 'gtavc.zip';
+  // arg = 'motorsports_playground';
+  // modMaps = ['gtavc.zip', 'libertycity.zip'];
+
+  // // // // TO DO: FIX MAP SELECTION/MOVING MAPS TO AND FROM RESOURCES/CLIENT and custom_maps // // // //
 });
 
 ipcMain.handle('getSelectedMap', async () => {

@@ -49,7 +49,10 @@ export default function App() {
         .getSelectedMap()
         .then((res) => setSelectedMap(res))
         .catch((err) => console.error(err));
-      window.electron.ipcRenderer.getLayout().then((res) => setLayout(res));
+      window.electron.ipcRenderer
+        .getLayout()
+        .then((res) => setLayout(res))
+        .catch((err) => console.error(err));
     }
   };
 
