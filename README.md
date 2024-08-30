@@ -44,7 +44,7 @@ BeamMP Manager is a powerful tool designed to manage BeamMP servers efficiently.
 
 ## Installation
 
-1. Download the latest release for your operating system from the [releases page](https://github.com/your-repo/beammp-manager/releases).
+1. Download the latest release for your operating system from the [releases page](https://github.com/TheBiggestTrees/beammp-manager/releases).
 2. Install the application following the standard procedure for your OS.
 
 ## Usage
