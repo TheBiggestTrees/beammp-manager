@@ -14,9 +14,14 @@
 }
 
 :root {
-  background-color: #6b7280;
+  background: linear-gradient(to bottom, #6b7280, #000000);
   -ms-overflow-style: none;
   scrollbar-width: none;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 :root::-webkit-scrollbar {

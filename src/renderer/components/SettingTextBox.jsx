@@ -20,7 +20,7 @@ function SettingTextBox(props) {
         <span className="text-white mr-2">{text}</span>
         <button
           type="button"
-          className={`bg-white w-24 h-8 border-2 border-black rounded-lg ${width}`}
+          className={`bg-white  w-24 h-8 border-2 border-black rounded-lg ${width} hover:bg-opacity-50 transition-all duration-150 ease-in-out`}
           onClick={() => {
             setSettingsChanged(true);
             return setServerSettings((prev) => ({
@@ -64,7 +64,7 @@ function SettingTextBox(props) {
         <span className="text-white mr-2">{text}</span>
         <button
           type="button"
-          className={`bg-white w-24 h-8 border-2 border-black rounded-lg ${width}`}
+          className={`bg-white  w-24 h-8 border-2 border-black rounded-lg ${width} hover:bg-opacity-50 transition-all duration-150 ease-in-out`}
           onClick={() => {
             setSettingsChanged(true);
             return setServerSettings((prev) => ({
@@ -84,7 +84,7 @@ function SettingTextBox(props) {
         <span className="text-white mr-2">{text}</span>
         <button
           type="button"
-          className={`bg-white w-24 h-8 border-2 border-black rounded-lg ${width}`}
+          className={`bg-white  w-24 h-8 border-2 border-black rounded-lg ${width} hover:bg-opacity-50 transition-all duration-150 ease-in-out`}
           onClick={() => {
             setSettingsChanged(true);
             return setServerSettings((prev) => ({

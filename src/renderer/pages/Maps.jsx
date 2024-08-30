@@ -48,23 +48,23 @@ function Maps(props) {
 
   return (
     <div
-      className={`flex flex-col overflow-hidden  no-scrollbar ${
+      className={`flex flex-col overflow-hidden no-scrollbar ${
         layout === 'default'
-          ? 'mx-4 h-[calc(100vh-100px)]'
-          : 'w-full h-[calc(100vh-475px)]'
-      }`}
+          ? 'mx-4'
+          : 'w-full'
+      } h-[calc(100%-115px)]`}
     >
       {layout === 'default' && <div className="bg-black rounded-lg h-[2px]" />}
       {layout === 'alternate' && (
         <h1 className="text-lg text-white font-bold">Maps</h1>
       )}
-      <span className="font-bold">
-        Total: <span className="text-white">{maps.length}</span>
+      <span className="font-bold text-white my-2">
+        Total: {maps.length}
       </span>
-      <div className="flex items-center justify-center text-white bg-slate-600 border-2 border-black rounded-lg mb-2">
+      {selectedMap && <div className="flex items-center justify-center text-white bg-green-600/50 border-2 border-black rounded-lg mb-2">
         {selectedMap}
-      </div>
-      <div className="flex flex-col gap-2  overflow-auto no-scrollbar">
+      </div>}
+      <div className="flex flex-col gap-2 overflow-auto no-scrollbar">
         {maps.map((map) => {
           if (map !== selectedMap) {
             return (
@@ -74,9 +74,8 @@ function Maps(props) {
                 onClick={(e) => {
                   e.preventDefault();
                   SelectMap(map);
-
                 }}
-                className="border-2 border-black rounded-lg bg-white"
+                className="border-2 border-black rounded-lg bg-white hover:bg-opacity-50 transition-all duration-200 ease-in-out"
               >
                 {map}
               </button>

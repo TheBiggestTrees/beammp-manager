@@ -186,10 +186,6 @@ async function handleSelectMap(event, arg) {
   const parsed = JSON.parse(userconfig);
   const parseToml = TOML.parse(tomlconfig);
   let selected = parsed.selectedMap;
-  console.log(selected);
-  // const zipFolder = await GetFolderNames(
-  // `${pathD}\\custom_maps\\${}`
-  // );
 
   const defaultClickSaveConfig = () => {
     const toml = TOML.stringify({

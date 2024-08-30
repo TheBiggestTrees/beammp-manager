@@ -62,8 +62,8 @@ const ServerController = () => {
         type="button"
         className={
           status === 'Online'
-            ? 'bg-white text-red-500 w-8 h-8 border-2 border-black rounded-lg'
-            : 'bg-white text-green-600 w-8 h-8 border-2 border-black rounded-lg'
+            ? 'bg-white text-red-500 w-8 h-8 border-2 border-black rounded-lg hover:bg-opacity-50 transition-all duration-150 ease-in-out'
+            : 'bg-white text-green-600 w-8 h-8 border-2 border-black rounded-lg hover:bg-opacity-50 transition-all duration-150 ease-in-out'
         }
         onClick={() => StartStopFunction()}
       >
@@ -72,7 +72,7 @@ const ServerController = () => {
       {status === 'Online' && (
         <button
           type="button"
-          className="bg-white text-blue-600 w-8 h-8 border-2 border-black rounded-lg"
+          className="bg-white text-blue-600 w-8 h-8 border-2 border-black rounded-lg hover:bg-opacity-50 transition-all duration-150 ease-in-out"
           onClick={() => Controller('restart')}
           disabled={status !== 'Online'}
         >

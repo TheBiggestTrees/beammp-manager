@@ -32,20 +32,20 @@ function GeneralServerSettings(props) {
   };
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full h-[calc(100vh-109px)]">
       <div className="flex flex-col">
         <div className="flex flex-col gap-2 mt-4 ">
           <div className="flex justify-around items-center">
             <button
               type="button"
-              className="bg-white font-bold text-lg border-2 border-black p-2 flex items-center justify-center rounded-lg"
+              className="bg-white font-bold text-lg border-2 border-black p-2 flex items-center justify-center rounded-lg hover:bg-opacity-50 transition-all duration-150 ease-in-out"
               onClick={() => handleClick('openModsFolder')}
             >
               <Folder className="text-gray-600" /> Open Mods Folder
             </button>
             <button
               type="button"
-              className="bg-white font-bold text-lg border-2 border-black p-2 flex items-center justify-center rounded-lg"
+              className="bg-white font-bold text-lg border-2 border-black p-2 flex items-center justify-center rounded-lg hover:bg-opacity-50 transition-all duration-150 ease-in-out"
               onClick={() => handleClick('openMapsFolder')}
             >
               <Folder className="text-gray-600" /> Open Maps Folder
