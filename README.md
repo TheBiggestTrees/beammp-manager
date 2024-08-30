@@ -69,7 +69,7 @@ To build the application for distribution:
 
 1. Ensure you have all dependencies installed by running `npm install`
 2. Run the build command for your target platform:
-   - For Windows: `npm run package -- --win`
+   - For Windows: `npm run package`
 3. The packaged application will be available in the `release/build` directory
 
 For more detailed build instructions and troubleshooting, please refer to the [electron-builder documentation](https://www.electron.build/).
