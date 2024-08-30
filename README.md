@@ -23,9 +23,9 @@ BeamMP Manager is a powerful tool designed to manage BeamMP servers efficiently.
 
 ### Server Management
 
-- Start and stop BeamMP servers with ease
+- Start, stop, and restart BeamMP servers with ease
 - Monitor server status in real-time
-- Execute server commands directly from the application
+
 
 ### Configuration
 
@@ -47,17 +47,12 @@ BeamMP Manager is a powerful tool designed to manage BeamMP servers efficiently.
 
 - Choose between different layout options
 
-### Development Tools
-
-- Built-in developer tools for debugging and testing
-
 ## Technical Details
 
 - **Framework**: Electron with React
 - **Language**: TypeScript/JavaScript
 - **Packaging**: electron-builder for creating distributable packages
 - **Build Process**: Webpack for bundling and optimization
-- **Testing**: Jest for unit testing
 
 ## Installation
 
