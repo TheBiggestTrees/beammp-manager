@@ -5,11 +5,18 @@ BeamMP Manager is a powerful tool designed to manage BeamMP servers efficiently.
 ## Preview
 
 <div align="center">
-  <img src="./assets/promo/Home(alt).png" alt="Home(alt)" width="200"/>
-  <img src="./assets/promo/Home.png" alt="Home" width="200"/>
-  <img src="./assets/promo/maps.png" alt="Maps" width="200"/>
-  <img src="./assets/promo/mods.png" alt="Mods" width="200"/>
-  <img src="./assets/promo/settings.png" alt="Settings" width="200"/>
+  <table>
+    <tr>
+      <td><img src="./assets/promo/Home(alt).png" alt="Home(alt)" width="200"/></td>
+      <td><img src="./assets/promo/Home.png" alt="Home" width="200"/></td>
+      <td><img src="./assets/promo/maps.png" alt="Maps" width="200"/></td>
+    </tr>
+    <tr>
+      <td><img src="./assets/promo/mods.png" alt="Mods" width="200"/></td>
+      <td><img src="./assets/promo/settings.png" alt="Settings" width="200"/></td>
+      <td></td>
+    </tr>
+  </table>
 </div>
 
 ## Features
