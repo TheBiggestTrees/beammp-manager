@@ -19,9 +19,11 @@ declare global {
         getServerSettings(): void;
         setServerSettings(): void;
         getModPictures(): void;
+        getLayout(): void;
       };
     };
   }
 }
 
-export {};
+export { };
+

@@ -1,9 +1,8 @@
 /* eslint no-console: "off" */
 
+
 function Maps(props) {
   const {
-    mapCache,
-    setMapCache,
     setMaps,
     setSelectedMap,
     maps,
@@ -11,9 +10,40 @@ function Maps(props) {
     layout,
   } = props;
 
+  const defaultMaps = [
+    'gridmap',
+    'gridmap_v2',
+    'automation_test_track',
+    'east_coast_usa',
+    'hirochi_raceway',
+    'italy',
+    'industrial',
+    'small_island',
+    'smallgrid',
+    'utah',
+    'west_coast_usa',
+    'driver_training',
+    'derby',
+    'jungle_rock_island',
+    'johnson_valley',
+  ];
+
   const SelectMap = (map) => {
     window.electron.ipcRenderer.selectMap(map);
     setSelectedMap(map);
+    RefreshMapList();
+  };
+
+
+
+  const RefreshMapList = () => {
+    setTimeout(() => {
+      window.electron.ipcRenderer.getMaps().then((res) => {
+        const result = [...defaultMaps, ...res];
+        result.sort((a, b) => a.localeCompare(b));
+        setMaps(result);
+      });
+    }, 500);
   };
 
   return (
@@ -44,6 +74,7 @@ function Maps(props) {
                 onClick={(e) => {
                   e.preventDefault();
                   SelectMap(map);
+
                 }}
                 className="border-2 border-black rounded-lg bg-white"
               >

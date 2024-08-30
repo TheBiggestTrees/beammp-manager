@@ -16,7 +16,6 @@ const GetFolderNames = async (filePath) => {
 };
 
 const GetModPictures = (filePath, root) => {
-  console.log(root);
   // filePath =  `J:\\BeamMP\\resources\\client\\custom_mod.zip`
   // open the zip
   const zip = new AdmZip(filePath);

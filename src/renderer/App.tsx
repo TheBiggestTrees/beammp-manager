@@ -10,7 +10,6 @@ import Settings from './pages/Settings';
 import AppProvider from './providers/app';
 
 export default function App() {
-  const [mapCache, setMapCache] = useState(null);
   const [maps, setMaps] = useState([]);
   const [selectedMap, setSelectedMap] = useState('');
   const [folder, setFolder] = useState('');
@@ -36,29 +35,24 @@ export default function App() {
   ];
 
   const RefreshMaps = () => {
-    if (!mapCache) {
-      window.electron.ipcRenderer
-        .getMaps()
-        .then((res) => {
-          const result = [...defaultMaps, ...res];
-          setMapCache(result);
-          return setMaps(result);
-        })
-        .catch((err) => console.error(err));
-      window.electron.ipcRenderer
-        .getSelectedMap()
-        .then((res) => setSelectedMap(res))
-        .catch((err) => console.error(err));
-      window.electron.ipcRenderer
-        .getLayout()
-        .then((res) => setLayout(res))
-        .catch((err) => console.error(err));
-    }
+    Promise.all([
+      window.electron.ipcRenderer.getMaps(),
+      window.electron.ipcRenderer.getSelectedMap(),
+      window.electron.ipcRenderer.getLayout()
+    ])
+      .then(([mapsRes, selectedMapRes, layoutRes]) => {
+        const result = [...defaultMaps, ...mapsRes];
+        result.sort((a, b) => a.localeCompare(b));
+        setMaps(result);
+        setSelectedMap(selectedMapRes);
+        setLayout(layoutRes);
+      })
+      .catch((err) => console.error('Error refreshing maps:', err));
   };
 
   useEffect(() => {
     RefreshMaps();
-  }, [folder]);
+  }, []);
 
   return (
     <AppProvider>
@@ -120,12 +114,12 @@ export default function App() {
               path="/"
               element={
                 <Home
-                  mapCache={mapCache}
-                  setMapCache={setMapCache}
+
                   setMaps={setMaps}
                   setSelectedMap={setSelectedMap}
                   maps={maps}
                   selectedMap={selectedMap}
+                  RefreshMaps={RefreshMaps}
                   layout={layout}
                 />
               }
@@ -134,12 +128,12 @@ export default function App() {
               path="/maps"
               element={
                 <Maps
-                  mapCache={mapCache}
-                  setMapCache={setMapCache}
+
                   setMaps={setMaps}
                   setSelectedMap={setSelectedMap}
                   maps={maps}
                   selectedMap={selectedMap}
+                  RefreshMaps={RefreshMaps}
                   layout={layout}
                 />
               }

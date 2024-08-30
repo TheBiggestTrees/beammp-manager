@@ -4,13 +4,13 @@ import Mods from './Mods';
 
 function Home(props) {
   const {
-    mapCache,
-    setMapCache,
+
     setMaps,
     setSelectedMap,
     maps,
     selectedMap,
     layout,
+    RefreshMaps,
   } = props;
   const [serverSettings, setServerSettings] = useState(null);
 
@@ -33,16 +33,16 @@ function Home(props) {
               <GeneralServerSettings
                 serverSettings={serverSettings}
                 setServerSettings={setServerSettings}
-                mapCache={mapCache}
-                setMapCache={setMapCache}
+
                 setMaps={setMaps}
                 setSelectedMap={setSelectedMap}
                 maps={maps}
                 selectedMap={selectedMap}
+                RefreshMaps={RefreshMaps}
                 layout={layout}
               />
             </div>
-            {layout === 'alternate' && <Mods />}
+            {layout === 'alternate' && <Mods selectedMap={selectedMap} />}
           </div>
         </>
       ) : (

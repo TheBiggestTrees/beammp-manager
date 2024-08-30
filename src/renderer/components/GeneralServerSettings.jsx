@@ -7,13 +7,13 @@ function GeneralServerSettings(props) {
   const {
     serverSettings,
     setServerSettings,
-    mapCache,
-    setMapCache,
+
     setMaps,
     setSelectedMap,
     maps,
     layout,
     selectedMap,
+    RefreshMaps,
   } = props;
 
   const [settingsChanged, setSettingsChanged] = useState(false);
@@ -209,12 +209,12 @@ function GeneralServerSettings(props) {
       </div>
       {layout === 'alternate' && (
         <Maps
-          mapCache={mapCache}
-          setMapCache={setMapCache}
+
           setMaps={setMaps}
           setSelectedMap={setSelectedMap}
           maps={maps}
           selectedMap={selectedMap}
+          RefreshMaps={RefreshMaps}
         />
       )}
     </div>
