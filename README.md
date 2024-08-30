@@ -2,6 +2,16 @@
 
 BeamMP Manager is a powerful tool designed to manage BeamMP servers efficiently. Built with Electron and React, this application provides a user-friendly interface for server administrators to control and customize their BeamMP game servers.
 
+## Preview
+
+<div align="center">
+  <img src="./assets/promo/Home(alt).png" alt="Home(alt)" width="200"/>
+  <img src="./assets/promo/Home.png" alt="Home" width="200"/>
+  <img src="./assets/promo/maps.png" alt="Maps" width="200"/>
+  <img src="./assets/promo/mods.png" alt="Mods" width="200"/>
+  <img src="./assets/promo/settings.png" alt="Settings" width="200"/>
+</div>
+
 ## Features
 
 ### Server Management
