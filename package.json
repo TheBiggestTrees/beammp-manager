@@ -211,6 +211,14 @@
         "nsis"
       ]
     },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "BeamMP Manager"
+    },
     "linux": {
       "target": [
         "AppImage"
@@ -223,7 +231,11 @@
       "output": "release/build"
     },
     "extraResources": [
-      "./assets/**"
+      "./assets/**",
+      {
+        "from": "./assets/userconfig.json",
+        "to": "../userconfig.json"
+      }
     ]
   },
   "devEngines": {
